@@ -5,26 +5,37 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUpScreen from "./SignUpScreen";
+import HomeScreen from "./HomeScreen";
 
-function LoginScreen(props) {
+const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#f93" barStyle="light-content" />
       <Text style={styles.txt}>Happy Class</Text>
       <TextInput style={styles.input} placeholder="Username" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry />
       <View style={styles.btncontainer}>
-        <TouchableOpacity style={styles.button} onPress={() => alert("WIP")}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate(HomeScreen)}
+        >
           <Text style={styles.btntxt}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => alert("WIP")}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate(SignUpScreen)}
+        >
           <Text style={styles.btntxt}>Signup</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
