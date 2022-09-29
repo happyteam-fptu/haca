@@ -18,13 +18,13 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.btncontainer}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate()}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={styles.btntxt}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate()}
+          onPress={() => navigation.navigate("SignUp")}
         >
           <Text style={styles.btntxt}>Signup</Text>
         </TouchableOpacity>
