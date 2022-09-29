@@ -7,10 +7,6 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignUpScreen from "./SignUpScreen";
-import HomeScreen from "./HomeScreen";
 
 const LoginScreen = ({ navigation }) => {
   return (
@@ -22,13 +18,13 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.btncontainer}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate(HomeScreen)}
+          onPress={() => navigation.navigate()}
         >
           <Text style={styles.btntxt}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate(SignUpScreen)}
+          onPress={() => navigation.navigate()}
         >
           <Text style={styles.btntxt}>Signup</Text>
         </TouchableOpacity>
