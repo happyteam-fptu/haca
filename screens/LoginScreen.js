@@ -7,8 +7,11 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
+<<<<<<< HEAD
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+=======
+>>>>>>> bd40dc5fd69c3caa207f369af47b2eaddd05ec44
 
 const LoginScreen = ({ navigation }) => {
   return (
@@ -20,13 +23,21 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.btncontainer}>
         <TouchableOpacity
           style={styles.button}
+<<<<<<< HEAD
           onPress={() => navigation.navigate("HomeScreen")}
+=======
+          onPress={() => navigation.navigate("Home")}
+>>>>>>> bd40dc5fd69c3caa207f369af47b2eaddd05ec44
         >
           <Text style={styles.btntxt}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
+<<<<<<< HEAD
           onPress={() => navigation.navigate("SignUpScreen")}
+=======
+          onPress={() => navigation.navigate("SignUp")}
+>>>>>>> bd40dc5fd69c3caa207f369af47b2eaddd05ec44
         >
           <Text style={styles.btntxt}>Signup</Text>
         </TouchableOpacity>
