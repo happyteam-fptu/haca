@@ -15,6 +15,9 @@ import config from "../global/config";
  * TODO:
  * - Add loading overlay when user click on login button, waiting for
  * server to response...
+ * - Add AsyncStorage handling login success logic for keeping
+ * logged-in state when user reopen the app... (Save access and
+ * refresh to AsyncStorage)
  */
 
 const LoginScreen = ({ navigation }) => {
