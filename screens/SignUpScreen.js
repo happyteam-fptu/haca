@@ -1,11 +1,15 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
 
 function SignUpScreen(props) {
   return (
     <View style={styles.container}>
-      <Text>SignUpScreen</Text>
-      <Button title="Click here" onPress={() => alert("Button Clicked")} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => Alert.alert("W.I.P", "Work on progress")}
+      >
+        <Text style={styles.txt}>SignUpScreen</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -15,6 +19,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  txt: {
+    fontSize: 30,
+    textAlign: "center",
+    margin: 10,
+  },
+  button: {
+    backgroundColor: "#ff3",
+    padding: 12,
+    width: "40%",
   },
 });
 

@@ -7,11 +7,6 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-<<<<<<< HEAD
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-=======
->>>>>>> bd40dc5fd69c3caa207f369af47b2eaddd05ec44
 
 const LoginScreen = ({ navigation }) => {
   return (
@@ -20,26 +15,18 @@ const LoginScreen = ({ navigation }) => {
       <Text style={styles.txt}>Happy Class</Text>
       <TextInput style={styles.input} placeholder="Username" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-      <View style={styles.btncontainer}>
+      <View style={styles.btnContainer}>
         <TouchableOpacity
           style={styles.button}
-<<<<<<< HEAD
-          onPress={() => navigation.navigate("HomeScreen")}
-=======
           onPress={() => navigation.navigate("Home")}
->>>>>>> bd40dc5fd69c3caa207f369af47b2eaddd05ec44
         >
-          <Text style={styles.btntxt}>Login</Text>
+          <Text style={styles.btnTxt}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-<<<<<<< HEAD
-          onPress={() => navigation.navigate("SignUpScreen")}
-=======
           onPress={() => navigation.navigate("SignUp")}
->>>>>>> bd40dc5fd69c3caa207f369af47b2eaddd05ec44
         >
-          <Text style={styles.btntxt}>Signup</Text>
+          <Text style={styles.btnTxt}>Signup</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -64,7 +51,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 10,
   },
-  btncontainer: {
+  btnContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "80%",
@@ -74,7 +61,7 @@ const styles = StyleSheet.create({
     padding: 12,
     width: "40%",
   },
-  btntxt: {
+  btnTxt: {
     fontSize: 15,
     textAlign: "center",
   },
