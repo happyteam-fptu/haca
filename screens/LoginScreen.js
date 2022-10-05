@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import {
   View,
@@ -6,20 +7,84 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
+  Alert,
 } from "react-native";
+import config from "../global/config";
 
 const LoginScreen = ({ navigation }) => {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleLogin = async () => {
+    try {
+      let bodyFormData = new FormData();
+      bodyFormData.append("username", username);
+      bodyFormData.append("password", password);
+      const response = await axios.post(
+        config.API_URL + "/v1.0/auth/login",
+        bodyFormData
+      );
+      if (response.data.status == "success") {
+        // Login thanh cong...
+        navigation.navigate("Home");
+      } else {
+        // Login that bai
+        switch (response.data.status_code) {
+          case "wrong_or_missing_params":
+            Alert.alert(
+              "Đã có lỗi xảy ra...",
+              "Thông tin bạn đã nhập không đúng định dạng!"
+            );
+            break;
+          case "user_auth_failed_unknown_user":
+            Alert.alert(response.data.detail);
+            break;
+          case "user_auth_failed_wrong_pass":
+            Alert.alert(response.data.detail);
+            break;
+          case "user_auth_failed_missing_field":
+            if (
+              response.data.detail.username &&
+              response.data.detail.password
+            ) {
+              Alert.alert("Vui lòng điền đầy đủ thông tin!");
+            } else if (
+              response.data.detail.username &&
+              !response.data.detail.password
+            ) {
+              Alert.alert("Vui lòng nhập tên đăng nhập!");
+            } else {
+              Alert.alert("Vui lòng nhập mật khẩu!");
+            }
+            break;
+          default:
+        }
+      }
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#f93" barStyle="light-content" />
+      <StatusBar backgroundColor="#f93" barStyle="default" />
       <Text style={styles.txt}>Happy Class</Text>
-      <TextInput style={styles.input} placeholder="Username" />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+      <TextInput
+        onChangeText={(val) => setUsername(val)}
+        value={username}
+        style={styles.input}
+        placeholder="Username"
+      />
+      <TextInput
+        onChangeText={(val) => setPassword(val)}
+        value={password}
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+      />
       <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Home")}
-        >
+        <TouchableOpacity style={styles.button} onPress={() => handleLogin()}>
           <Text style={styles.btnTxt}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
