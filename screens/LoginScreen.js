@@ -71,7 +71,8 @@ const LoginScreen = ({ navigation }) => {
       }
       return response.data;
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      Alert.alert("Đã có lỗi xảy ra!", err.message);
     }
   };
 
