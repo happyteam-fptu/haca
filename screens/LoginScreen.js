@@ -11,6 +11,12 @@ import {
 } from "react-native";
 import config from "../global/config";
 
+/**
+ * TODO:
+ * - Add loading overlay when user click on login button, waiting for
+ * server to response...
+ */
+
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
