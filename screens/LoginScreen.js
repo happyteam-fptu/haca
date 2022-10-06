@@ -8,8 +8,11 @@ import {
   TouchableOpacity,
   StatusBar,
   Alert,
+  SafeAreaView,
 } from "react-native";
 import config from "../global/config";
+import Icon from "react-native-vector-icons/Ionicons";
+import { getStatusBarHeight } from "react-native-status-bar-height";
 
 /**
  * TODO:
@@ -25,6 +28,8 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = React.useState("");
 
   const handleLogin = async () => {
+    // console.log(getStatusBarHeight());
+
     try {
       let bodyFormData = new FormData();
       bodyFormData.append("username", username);
@@ -77,33 +82,43 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1">
       <StatusBar backgroundColor="#f93" barStyle="default" />
-
-      <Text style={styles.txt}>Happy Class</Text>
-      <TextInput
-        onChangeText={(val) => setUsername(val)}
-        value={username}
-        style={styles.input}
-        placeholder="Username"
-      />
-      <TextInput
-        onChangeText={(val) => setPassword(val)}
-        value={password}
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-      />
-      <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => handleLogin()}>
-          <Text style={styles.btnTxt}>Login</Text>
-        </TouchableOpacity>
+      <SafeAreaView className="relative z-10">
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("SignUp")}
+          className={`absolute right-0 p-2`}
+          style={{ top: getStatusBarHeight() }}
+          onPress={() => navigation.goBack()}
         >
-          <Text style={styles.btnTxt}>Signup</Text>
+          <Icon name="close-outline" size={45} color="#000" />
         </TouchableOpacity>
+      </SafeAreaView>
+      <View style={styles.container} className="relative z-0">
+        <Text style={styles.txt}>Happy Class</Text>
+        <TextInput
+          onChangeText={(val) => setUsername(val)}
+          value={username}
+          style={styles.input}
+          placeholder="Username"
+        />
+        <TextInput
+          onChangeText={(val) => setPassword(val)}
+          value={password}
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry
+        />
+        <View style={styles.btnContainer}>
+          <TouchableOpacity style={styles.button} onPress={() => handleLogin()}>
+            <Text style={styles.btnTxt}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("SignUp")}
+          >
+            <Text style={styles.btnTxt}>Signup</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
