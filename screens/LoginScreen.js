@@ -9,10 +9,14 @@ import {
   StatusBar,
   Alert,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 import config from "../global/config";
 import Icon from "react-native-vector-icons/Ionicons";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import { CommonActions } from "@react-navigation/native";
 
 /**
  * TODO:
@@ -40,7 +44,12 @@ const LoginScreen = ({ navigation }) => {
       );
       if (response.data.status == "success") {
         // Login thanh cong...
-        navigation.navigate("Home");
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          })
+        );
       } else {
         // Login that bai
         switch (response.data.status_code) {
@@ -82,45 +91,52 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View className="flex-1">
-      <StatusBar backgroundColor="#f93" barStyle="default" />
-      <SafeAreaView className="relative z-10">
-        <TouchableOpacity
-          className={`absolute right-0 p-2`}
-          style={{ top: getStatusBarHeight() }}
-          onPress={() => navigation.goBack()}
-        >
-          <Icon name="close-outline" size={45} color="#000" />
-        </TouchableOpacity>
-      </SafeAreaView>
-      <View style={styles.container} className="relative z-0">
-        <Text style={styles.txt}>Happy Class</Text>
-        <TextInput
-          onChangeText={(val) => setUsername(val)}
-          value={username}
-          style={styles.input}
-          placeholder="Username"
-        />
-        <TextInput
-          onChangeText={(val) => setPassword(val)}
-          value={password}
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-        />
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => handleLogin()}>
-            <Text style={styles.btnTxt}>Login</Text>
-          </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAvoidingView className="flex-1 bg-[#F99934]" behavior="padding">
+        <StatusBar backgroundColor="#f93" barStyle="default" />
+        <SafeAreaView className="relative z-10">
           <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("SignUp")}
+            className={`absolute right-0 p-2`}
+            style={{ top: getStatusBarHeight() }}
+            onPress={() => navigation.goBack()}
           >
-            <Text style={styles.btnTxt}>Signup</Text>
+            <Icon name="close-outline" size={45} color="#000" />
           </TouchableOpacity>
+        </SafeAreaView>
+        <View style={styles.container} className="relative z-0">
+          <View>
+            <Text style={styles.txt}>Happy Class</Text>
+          </View>
+          <TextInput
+            onChangeText={(val) => setUsername(val)}
+            value={username}
+            style={styles.input}
+            placeholder="Username"
+          />
+          <TextInput
+            onChangeText={(val) => setPassword(val)}
+            value={password}
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry
+          />
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => handleLogin()}
+            >
+              <Text style={styles.btnTxt}>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("SignUp")}
+            >
+              <Text style={styles.btnTxt}>Signup</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
