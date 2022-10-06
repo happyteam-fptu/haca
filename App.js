@@ -19,7 +19,14 @@ function App() {
           component={WelcomeScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+            presentation: "fullScreenModal",
+          }}
+        />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>

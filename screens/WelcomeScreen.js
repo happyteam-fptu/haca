@@ -10,33 +10,18 @@ import {
 } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import Pulse from "react-native-pulse";
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
   return (
-    <LinearGradient
-      // Background Linear Gradient
-      colors={["#E7B181", "#F79122"]}
-      className="flex-1"
-    >
+    <LinearGradient colors={["#E7B181", "#F79122"]} className="flex-1">
       <StatusBar backgroundColor="#f93" barStyle="light-content" />
       <SafeAreaView className="flex-1">
         <View className="flex-1 justify-evenly items-center">
           <Text className="text-lg text-center text-white w-[65%] font-medium">
             Giao lưu và giải trí với những người bạn cùng lớp.
           </Text>
-          <Pulse
-            color="rgba(255,255,255,0.5)"
-            diameter={280}
-            speed={15}
-            duration={2000}
-            numPulses={3}
-          />
-          <Image
-            source={require("../assets/logo-app.png")}
-            className="aspect-square w-28 h-28"
-          />
-          {/* <View
+
+          <View
             className="w-40 h-40 rounded-full items-center justify-center shadow-sm relative z-10"
             style={{
               backgroundColor: "rgba(255,255,255,0.15)",
@@ -46,8 +31,11 @@ const WelcomeScreen = () => {
               className="w-40 h-40 rounded-full items-center justify-center shadow-md absolute scale-150 z-0"
               style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
             ></View>
-            
-          </View> */}
+            <Image
+              source={require("../assets/logo-app.png")}
+              className="aspect-square w-28 h-28 shadow-sm"
+            />
+          </View>
 
           <View>
             <Text className="font-extrabold text-yellow-200 text-4xl">
@@ -70,7 +58,7 @@ const WelcomeScreen = () => {
             shadowRadius: 3.84,
             elevation: 5,
           }}
-          onPress={() => null}
+          onPress={() => navigation.navigate("Login")}
         >
           <View className="w-[50%] bg-white h-14 items-center justify-center rounded-full">
             <Text className="font-bold text-[16px]">Bắt đầu</Text>

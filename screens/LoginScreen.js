@@ -79,6 +79,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#f93" barStyle="default" />
+
       <Text style={styles.txt}>Happy Class</Text>
       <TextInput
         onChangeText={(val) => setUsername(val)}
