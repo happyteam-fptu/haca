@@ -12,6 +12,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
+  Image,
+  Linking,
 } from "react-native";
 import config from "../global/config";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -25,6 +27,13 @@ import { CommonActions } from "@react-navigation/native";
  * - Add AsyncStorage handling login success logic for keeping
  * logged-in state when user reopen the app... (Save access and
  * refresh to AsyncStorage)
+ * - Connect Forgotten Password API from PHP Backend Server into
+ * Forgotten password button
+ * - Add delete all button at the end of each TextInput in Login
+ * screen for better productivity
+ * - Add view or hide password at the end of Password TextInput
+ * - (ADDITIONAL): Wrong password red border of pwd txtinput and
+ * below error message like Instagram...
  */
 
 const LoginScreen = ({ navigation }) => {
@@ -32,8 +41,6 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = React.useState("");
 
   const handleLogin = async () => {
-    // console.log(getStatusBarHeight());
-
     try {
       let bodyFormData = new FormData();
       bodyFormData.append("username", username);
@@ -92,50 +99,73 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <KeyboardAvoidingView className="flex-1 bg-[#F99934]" behavior="padding">
-        <StatusBar backgroundColor="#f93" barStyle="default" />
-        <SafeAreaView className="relative z-10">
-          <TouchableOpacity
-            className={`absolute right-0 p-2`}
-            style={{ top: getStatusBarHeight() }}
-            onPress={() => navigation.goBack()}
-          >
-            <Icon name="close-outline" size={45} color="#000" />
-          </TouchableOpacity>
-        </SafeAreaView>
-        <View style={styles.container} className="relative z-0">
-          <View>
-            <Text style={styles.txt}>Happy Class</Text>
-          </View>
-          <TextInput
-            onChangeText={(val) => setUsername(val)}
-            value={username}
-            style={styles.input}
-            placeholder="Username"
-          />
-          <TextInput
-            onChangeText={(val) => setPassword(val)}
-            value={password}
-            style={styles.input}
-            placeholder="Password"
-            secureTextEntry
-          />
-          <View style={styles.btnContainer}>
+      <View className="flex-1 bg-white">
+        <KeyboardAvoidingView className="flex-1 bg-white" behavior="padding">
+          <StatusBar backgroundColor="#f93" barStyle="default" />
+          <SafeAreaView className="relative z-10">
             <TouchableOpacity
-              style={styles.button}
-              onPress={() => handleLogin()}
+              className={`absolute right-0 p-2`}
+              style={{ top: getStatusBarHeight() }}
+              onPress={() => navigation.goBack()}
             >
-              <Text style={styles.btnTxt}>Login</Text>
+              <Icon name="close-outline" size={45} color="#000" />
+            </TouchableOpacity>
+          </SafeAreaView>
+          <View className="relative z-0 bg-white items-center justify-center flex-1">
+            <View className="flex-row items-center gap-x-2 mb-8">
+              <Image
+                source={require("../assets/logo-app.png")}
+                className="aspect-square w-14 shadow-sm"
+              />
+              <Text className="font-extrabold text-black text-5xl -mb-2.5 shadow-sm">
+                Haca
+              </Text>
+            </View>
+            <TextInput
+              onChangeText={(val) => setUsername(val)}
+              value={username}
+              className="bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] border-gray-300"
+              placeholder="Tên đăng nhập"
+              placeholderTextColor={"#707070"}
+            />
+            <TextInput
+              onChangeText={(val) => setPassword(val)}
+              value={password}
+              className="bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] border-gray-300"
+              placeholder="Mật khẩu"
+              secureTextEntry
+              placeholderTextColor={"#707070"}
+            />
+            <TouchableOpacity className="mb-3 w-[90%]">
+              <Text className="text-right text-xs font-semibold text-[#F79122]">
+                Quên mật khẩu?
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("SignUp")}
+              onPress={() => handleLogin()}
+              className="w-[90%] bg-[#F79122] py-3.5 rounded-md"
             >
-              <Text style={styles.btnTxt}>Signup</Text>
+              <Text className="font-semibold text-center text-white">
+                Đăng nhập
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+        <View className="h-20 border-t-[0.5px] border-gray-300 justify-center items-center">
+          <View className="flex-row">
+            <Text className="text-gray-500 text-xs">
+              Bạn chưa có tài khoản ư?{" "}
+            </Text>
+            <TouchableOpacity
+              onPress={() => Linking.openURL("https://m.me/haca.fptu")}
+            >
+              <Text className="text-[#F79122] font-semibold text-xs">
+                Liên hệ Happy Team.
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
