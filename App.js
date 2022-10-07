@@ -26,7 +26,8 @@ function App() {
           component={LoginScreen}
           options={{
             headerShown: false,
-            presentation: "fullScreenModal",
+            animation: "slide_from_bottom",
+            animationDuration: 330,
           }}
         />
         <Stack.Screen

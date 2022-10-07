@@ -136,7 +136,7 @@ const LoginScreen = ({ navigation }) => {
               secureTextEntry
               placeholderTextColor={"#707070"}
             />
-            <TouchableOpacity className="mb-3 w-[90%]">
+            <TouchableOpacity className="mt-1 mb-4 w-[90%]">
               <Text className="text-right text-xs font-semibold text-[#F79122]">
                 Quên mật khẩu?
               </Text>
