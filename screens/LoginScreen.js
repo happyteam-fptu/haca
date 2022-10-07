@@ -21,6 +21,7 @@ import config from "../global/config";
 import Icon from "react-native-vector-icons/Ionicons";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { CommonActions } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /**
  * TODO:
@@ -43,6 +44,17 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = React.useState("");
   const [signingIn, setSigningIn] = React.useState(false);
 
+  const setTokenStorage = async (access_token, refresh_token) => {
+    try {
+      await AsyncStorage.setItem("access_token", access_token);
+      await AsyncStorage.setItem("refresh_token", refresh_token);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  };
+
   const handleLogin = async () => {
     try {
       setSigningIn(true);
@@ -53,7 +65,13 @@ const LoginScreen = ({ navigation }) => {
         config.API_URL + "/v1.0/auth/login",
         bodyFormData
       );
-      if (response.data.status == "success") {
+      if (
+        response.data.status == "success" &&
+        setTokenStorage(
+          response.data.auth_data.access_token,
+          response.data.auth_data.refresh_token
+        )
+      ) {
         // Login thanh cong...
         setTimeout(() => {
           setSigningIn(false);
@@ -97,6 +115,10 @@ const LoginScreen = ({ navigation }) => {
               }
               break;
             default:
+              Alert.alert(
+                "Đã có lỗi xảy ra!",
+                "Không thể lưu thông tin đăng nhập vào bộ nhớ thiết bị... Thử kiểm tra lại các quyền của ứng dụng."
+              );
           }
         }, 500);
       }
