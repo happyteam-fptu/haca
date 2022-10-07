@@ -73,54 +73,50 @@ const LoginScreen = ({ navigation }) => {
         )
       ) {
         // Login thanh cong...
-        setTimeout(() => {
-          setSigningIn(false);
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: "Home" }],
-            })
-          );
-        }, 1000);
+        setSigningIn(false);
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          })
+        );
       } else {
         // Login that bai
-        setTimeout(() => {
-          setSigningIn(false);
-          switch (response.data.status_code) {
-            case "wrong_or_missing_params":
-              Alert.alert(
-                "Đã có lỗi xảy ra...",
-                "Thông tin bạn đã nhập không đúng định dạng!"
-              );
-              break;
-            case "user_auth_failed_unknown_user":
-              Alert.alert(response.data.detail);
-              break;
-            case "user_auth_failed_wrong_pass":
-              Alert.alert(response.data.detail);
-              break;
-            case "user_auth_failed_missing_field":
-              if (
-                response.data.detail.username &&
-                response.data.detail.password
-              ) {
-                Alert.alert("Vui lòng điền đầy đủ thông tin!");
-              } else if (
-                response.data.detail.username &&
-                !response.data.detail.password
-              ) {
-                Alert.alert("Vui lòng nhập tên đăng nhập!");
-              } else {
-                Alert.alert("Vui lòng nhập mật khẩu!");
-              }
-              break;
-            default:
-              Alert.alert(
-                "Đã có lỗi xảy ra!",
-                "Không thể lưu thông tin đăng nhập vào bộ nhớ thiết bị... Thử kiểm tra lại các quyền của ứng dụng."
-              );
-          }
-        }, 500);
+        setSigningIn(false);
+        switch (response.data.status_code) {
+          case "wrong_or_missing_params":
+            Alert.alert(
+              "Đã có lỗi xảy ra...",
+              "Thông tin bạn đã nhập không đúng định dạng!"
+            );
+            break;
+          case "user_auth_failed_unknown_user":
+            Alert.alert(response.data.detail);
+            break;
+          case "user_auth_failed_wrong_pass":
+            Alert.alert(response.data.detail);
+            break;
+          case "user_auth_failed_missing_field":
+            if (
+              response.data.detail.username &&
+              response.data.detail.password
+            ) {
+              Alert.alert("Vui lòng điền đầy đủ thông tin!");
+            } else if (
+              response.data.detail.username &&
+              !response.data.detail.password
+            ) {
+              Alert.alert("Vui lòng nhập tên đăng nhập!");
+            } else {
+              Alert.alert("Vui lòng nhập mật khẩu!");
+            }
+            break;
+          default:
+            Alert.alert(
+              "Đã có lỗi xảy ra!",
+              "Không thể lưu thông tin đăng nhập vào bộ nhớ thiết bị... Thử kiểm tra lại các quyền của ứng dụng."
+            );
+        }
       }
       return response.data;
     } catch (err) {
