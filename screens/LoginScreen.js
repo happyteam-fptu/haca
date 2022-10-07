@@ -123,7 +123,7 @@ const LoginScreen = ({ navigation }) => {
       console.error(err);
       Alert.alert(
         "Đã có lỗi xảy ra!",
-        err.message + "\nDebug info: API_URL -> " + config.API_URL
+        err.message == "Network Error" ? "Không có kết nối" : err.message
       );
       setSigningIn(false);
     }
