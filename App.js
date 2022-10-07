@@ -7,6 +7,7 @@ import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ function App() {
             animationDuration: 330,
           }}
         />
+        <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
         <Stack.Screen
           name="Home"
           component={HomeScreen}

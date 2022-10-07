@@ -14,6 +14,8 @@ import {
   KeyboardAvoidingView,
   Image,
   Linking,
+  ActivityIndicator,
+  Platform,
 } from "react-native";
 import config from "../global/config";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -39,9 +41,11 @@ import { CommonActions } from "@react-navigation/native";
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [signingIn, setSigningIn] = React.useState(false);
 
   const handleLogin = async () => {
     try {
+      setSigningIn(true);
       let bodyFormData = new FormData();
       bodyFormData.append("username", username);
       bodyFormData.append("password", password);
@@ -51,61 +55,74 @@ const LoginScreen = ({ navigation }) => {
       );
       if (response.data.status == "success") {
         // Login thanh cong...
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: "Home" }],
-          })
-        );
+        setTimeout(() => {
+          setSigningIn(false);
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            })
+          );
+        }, 1000);
       } else {
         // Login that bai
-        switch (response.data.status_code) {
-          case "wrong_or_missing_params":
-            Alert.alert(
-              "Đã có lỗi xảy ra...",
-              "Thông tin bạn đã nhập không đúng định dạng!"
-            );
-            break;
-          case "user_auth_failed_unknown_user":
-            Alert.alert(response.data.detail);
-            break;
-          case "user_auth_failed_wrong_pass":
-            Alert.alert(response.data.detail);
-            break;
-          case "user_auth_failed_missing_field":
-            if (
-              response.data.detail.username &&
-              response.data.detail.password
-            ) {
-              Alert.alert("Vui lòng điền đầy đủ thông tin!");
-            } else if (
-              response.data.detail.username &&
-              !response.data.detail.password
-            ) {
-              Alert.alert("Vui lòng nhập tên đăng nhập!");
-            } else {
-              Alert.alert("Vui lòng nhập mật khẩu!");
-            }
-            break;
-          default:
-        }
+        setTimeout(() => {
+          setSigningIn(false);
+          switch (response.data.status_code) {
+            case "wrong_or_missing_params":
+              Alert.alert(
+                "Đã có lỗi xảy ra...",
+                "Thông tin bạn đã nhập không đúng định dạng!"
+              );
+              break;
+            case "user_auth_failed_unknown_user":
+              Alert.alert(response.data.detail);
+              break;
+            case "user_auth_failed_wrong_pass":
+              Alert.alert(response.data.detail);
+              break;
+            case "user_auth_failed_missing_field":
+              if (
+                response.data.detail.username &&
+                response.data.detail.password
+              ) {
+                Alert.alert("Vui lòng điền đầy đủ thông tin!");
+              } else if (
+                response.data.detail.username &&
+                !response.data.detail.password
+              ) {
+                Alert.alert("Vui lòng nhập tên đăng nhập!");
+              } else {
+                Alert.alert("Vui lòng nhập mật khẩu!");
+              }
+              break;
+            default:
+          }
+        }, 500);
       }
       return response.data;
     } catch (err) {
       console.error(err);
-      Alert.alert("Đã có lỗi xảy ra!", err.message);
+      Alert.alert(
+        "Đã có lỗi xảy ra!",
+        err.message + "\nDebug info: API_URL -> " + config.API_URL
+      );
+      setSigningIn(false);
     }
   };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View className="flex-1 bg-white">
-        <KeyboardAvoidingView className="flex-1 bg-white" behavior="padding">
+        <KeyboardAvoidingView
+          className="flex-1 bg-white"
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
           <StatusBar backgroundColor="#f93" barStyle="default" />
           <SafeAreaView className="relative z-10">
             <TouchableOpacity
               className={`absolute right-0 p-2`}
-              style={{ top: getStatusBarHeight() }}
+              style={Platform.OS == "ios" && { top: getStatusBarHeight() }}
               onPress={() => navigation.goBack()}
             >
               <Icon name="close-outline" size={45} color="#000" />
@@ -136,7 +153,10 @@ const LoginScreen = ({ navigation }) => {
               secureTextEntry
               placeholderTextColor={"#707070"}
             />
-            <TouchableOpacity className="mt-1 mb-4 w-[90%]">
+            <TouchableOpacity
+              className="mt-1 mb-4 w-[90%]"
+              onPress={() => navigation.navigate("Forgot")}
+            >
               <Text className="text-right text-xs font-semibold text-[#F79122]">
                 Quên mật khẩu?
               </Text>
@@ -144,10 +164,15 @@ const LoginScreen = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => handleLogin()}
               className="w-[90%] bg-[#F79122] py-3.5 rounded-md"
+              disabled={signingIn}
             >
-              <Text className="font-semibold text-center text-white">
-                Đăng nhập
-              </Text>
+              {!signingIn ? (
+                <Text className="font-semibold text-center text-white leading-5">
+                  Đăng nhập
+                </Text>
+              ) : (
+                <ActivityIndicator size="small" color="#fff" />
+              )}
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

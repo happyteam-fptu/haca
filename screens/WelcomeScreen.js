@@ -14,7 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 const WelcomeScreen = ({ navigation }) => {
   return (
     <LinearGradient colors={["#E7B181", "#F79122"]} className="flex-1">
-      <StatusBar backgroundColor="#f93" barStyle="light-content" />
+      <StatusBar backgroundColor="#E7B181" barStyle="light-content" />
       <SafeAreaView className="flex-1">
         <View className="flex-1 justify-evenly items-center">
           <Text className="text-lg text-center text-white w-[65%] font-medium">
