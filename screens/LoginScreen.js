@@ -25,11 +25,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /**
  * TODO:
- * - Add loading overlay when user click on login button, waiting for
- * server to response...
- * - Add AsyncStorage handling login success logic for keeping
- * logged-in state when user reopen the app... (Save access and
- * refresh to AsyncStorage)
  * - Connect Forgotten Password API from PHP Backend Server into
  * Forgotten password button
  * - Add delete all button at the end of each TextInput in Login
@@ -43,6 +38,12 @@ const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [signingIn, setSigningIn] = React.useState(false);
+  const [wrongPassMsgVisible, setWrongPassMsgVisible] = React.useState(false);
+  const [isUsernameEmpty, setIsUsernameEmpty] = React.useState(true);
+  const [isPasswordEmpty, setIsPasswordEmpty] = React.useState(true);
+
+  const usernameRef = React.useRef();
+  const passwordRef = React.useRef();
 
   const setTokenStorage = async (access_token, refresh_token) => {
     try {
@@ -58,6 +59,7 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
     try {
       setSigningIn(true);
+      setWrongPassMsgVisible(false);
       let bodyFormData = new FormData();
       bodyFormData.append("username", username);
       bodyFormData.append("password", password);
@@ -94,7 +96,8 @@ const LoginScreen = ({ navigation }) => {
             Alert.alert(response.data.detail);
             break;
           case "user_auth_failed_wrong_pass":
-            Alert.alert(response.data.detail);
+            // Alert.alert(response.data.detail);
+            setWrongPassMsgVisible(true);
             break;
           case "user_auth_failed_missing_field":
             if (
@@ -157,32 +160,56 @@ const LoginScreen = ({ navigation }) => {
               </Text>
             </View>
             <TextInput
-              onChangeText={(val) => setUsername(val)}
+              onChangeText={(val) => {
+                val.length > 0
+                  ? setIsUsernameEmpty(false)
+                  : setIsUsernameEmpty(true);
+                setUsername(val);
+              }}
               value={username}
               className="bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] border-gray-300"
               placeholder="Tên đăng nhập"
               placeholderTextColor={"#707070"}
+              ref={usernameRef}
             />
             <TextInput
-              onChangeText={(val) => setPassword(val)}
+              onChangeText={(val) => {
+                val.length > 0
+                  ? setIsPasswordEmpty(false)
+                  : setIsPasswordEmpty(true);
+                setPassword(val);
+              }}
               value={password}
-              className="bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] border-gray-300"
+              className={`bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] ${
+                wrongPassMsgVisible ? "border-red-500" : "border-gray-300"
+              }`}
               placeholder="Mật khẩu"
               secureTextEntry
               placeholderTextColor={"#707070"}
+              ref={passwordRef}
             />
-            <TouchableOpacity
-              className="mt-1 mb-4 w-[90%]"
-              onPress={() => navigation.navigate("Forgot")}
-            >
-              <Text className="text-right text-xs font-semibold text-[#F79122]">
-                Quên mật khẩu?
+            <View className="mt-1 mb-4 flex-row justify-between w-[90%]">
+              <Text
+                className={`text-right text-xs text-red-500 ${
+                  !wrongPassMsgVisible && "opacity-0"
+                }`}
+              >
+                Sai mật khẩu.
               </Text>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
+                <Text className="text-right text-xs font-semibold text-[#F79122]">
+                  Quên mật khẩu?
+                </Text>
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity
               onPress={() => handleLogin()}
-              className="w-[90%] bg-[#F79122] py-3.5 rounded-md"
-              disabled={signingIn}
+              className={`w-[90%] ${
+                isUsernameEmpty || isPasswordEmpty || signingIn
+                  ? "bg-[#ffb363]"
+                  : "bg-[#F79122]"
+              } py-3.5 rounded-md`}
+              disabled={isUsernameEmpty || isPasswordEmpty || signingIn}
             >
               {!signingIn ? (
                 <Text className="font-semibold text-center text-white leading-5">
