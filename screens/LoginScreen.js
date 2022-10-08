@@ -171,6 +171,7 @@ const LoginScreen = ({ navigation }) => {
               placeholder="Tên đăng nhập"
               placeholderTextColor={"#707070"}
               ref={usernameRef}
+              onSubmitEditing={() => handleLogin()}
             />
             <TextInput
               onChangeText={(val) => {
@@ -187,6 +188,7 @@ const LoginScreen = ({ navigation }) => {
               secureTextEntry
               placeholderTextColor={"#707070"}
               ref={passwordRef}
+              onSubmitEditing={() => handleLogin()}
             />
             <View className="mt-1 mb-4 flex-row justify-between w-[90%]">
               <Text
