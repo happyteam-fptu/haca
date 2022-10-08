@@ -11,13 +11,13 @@ const LoadingScreen = ({ route, navigation }) => {
       setVisible(true);
     });
 
-    route?.params?.toScreen &&
-      setTimeout(() => {
+    setTimeout(() => {
+      route?.params?.toScreen &&
         navigation.navigate(
           route.params.toScreen,
           route.params.params ? route.params.params : null
         );
-      }, 1300);
+    }, 1300);
 
     const unsubscribe = navigation.addListener("blur", () => {
       // do something

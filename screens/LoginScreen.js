@@ -41,6 +41,9 @@ const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [signingIn, setSigningIn] = React.useState(false);
+  const [wrongMsg, setWrongMsg] = React.useState(
+    "Tên đăng nhập hoặc mật khẩu sai."
+  );
   const [wrongPassMsgVisible, setWrongPassMsgVisible] = React.useState(false);
   const [isUsernameEmpty, setIsUsernameEmpty] = React.useState(true);
   const [isPasswordEmpty, setIsPasswordEmpty] = React.useState(true);
@@ -101,10 +104,13 @@ const LoginScreen = ({ navigation }) => {
             );
             break;
           case "user_auth_failed_unknown_user":
-            Alert.alert(response.data.detail);
+            // Alert.alert(response.data.detail);
+            setWrongMsg("Không tìm thấy tài khoản.");
+            setWrongPassMsgVisible(true);
             break;
           case "user_auth_failed_wrong_pass":
             // Alert.alert(response.data.detail);
+            setWrongMsg("Sai mật khẩu.");
             setWrongPassMsgVisible(true);
             break;
           case "user_auth_failed_missing_field":
@@ -175,7 +181,11 @@ const LoginScreen = ({ navigation }) => {
                 setUsername(val);
               }}
               value={username}
-              className="bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] border-gray-300"
+              className={`bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] ${
+                wrongPassMsgVisible && wrongMsg == "Không tìm thấy tài khoản."
+                  ? "border-red-500"
+                  : "border-gray-300"
+              }`}
               placeholder="Tên đăng nhập"
               placeholderTextColor={"#707070"}
               ref={usernameRef}
@@ -190,7 +200,9 @@ const LoginScreen = ({ navigation }) => {
               }}
               value={password}
               className={`bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] ${
-                wrongPassMsgVisible ? "border-red-500" : "border-gray-300"
+                wrongPassMsgVisible && wrongMsg == "Sai mật khẩu."
+                  ? "border-red-500"
+                  : "border-gray-300"
               }`}
               placeholder="Mật khẩu"
               secureTextEntry
@@ -204,7 +216,7 @@ const LoginScreen = ({ navigation }) => {
                   !wrongPassMsgVisible && "opacity-0"
                 }`}
               >
-                Sai mật khẩu.
+                {wrongMsg}
               </Text>
               <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
                 <Text className="text-right text-xs font-semibold text-[#F79122]">
