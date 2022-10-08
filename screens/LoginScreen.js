@@ -68,7 +68,12 @@ const LoginScreen = ({ navigation }) => {
       bodyFormData.append("password", password);
       const response = await axios.post(
         config.API_URL + "/v1.0/auth/login",
-        bodyFormData
+        bodyFormData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       if (
         response.data.status == "success" &&
