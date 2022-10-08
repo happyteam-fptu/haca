@@ -22,6 +22,9 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { CommonActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import FormData from "form-data";
+
+FormData.prototype[Symbol.toStringTag] = "FormData";
 
 /**
  * TODO:

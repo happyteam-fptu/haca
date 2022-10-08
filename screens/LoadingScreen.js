@@ -6,15 +6,18 @@ const LoadingScreen = ({ route, navigation }) => {
   const [visible, setVisible] = React.useState(true);
 
   React.useEffect(() => {
-    setVisible(true);
+    const unsubscribe2 = navigation.addListener("focus", () => {
+      // do something
+      setVisible(true);
+    });
 
-    setTimeout(() => {
-      route?.params?.toScreen &&
+    route?.params?.toScreen &&
+      setTimeout(() => {
         navigation.navigate(
           route.params.toScreen,
           route.params.params ? route.params.params : null
         );
-    }, 1300);
+      }, 1300);
 
     const unsubscribe = navigation.addListener("blur", () => {
       // do something
@@ -23,7 +26,7 @@ const LoadingScreen = ({ route, navigation }) => {
       }, 1300);
     });
 
-    return unsubscribe;
+    return unsubscribe, unsubscribe2;
   });
 
   return (
