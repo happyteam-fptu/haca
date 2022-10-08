@@ -7,7 +7,6 @@ const LoadingScreen = ({ route, navigation }) => {
 
   React.useEffect(() => {
     const unsubscribe2 = navigation.addListener("focus", () => {
-      // do something
       setVisible(true);
     });
 
