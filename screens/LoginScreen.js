@@ -33,8 +33,6 @@ FormData.prototype[Symbol.toStringTag] = "FormData";
  * - Add delete all button at the end of each TextInput in Login
  * screen for better productivity
  * - Add view or hide password at the end of Password TextInput
- * - (ADDITIONAL): Wrong password red border of pwd txtinput and
- * below error message like Instagram...
  */
 
 const LoginScreen = ({ navigation }) => {

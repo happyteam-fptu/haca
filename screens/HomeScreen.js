@@ -1,11 +1,22 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  StatusBar,
+} from "react-native";
 import signOut from "../utilities/signOut";
 
-function HomeScreen(props) {
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Welcome to my app</Text>
+      <StatusBar backgroundColor="#f93" barStyle={"default"} />
+      <Image
+        className="p-5 m-10 w-[90%] h-[20%] "
+        source={require("../assets/anhbiapage.jpg")}
+      />
       <TouchableOpacity onPress={() => signOut()}>
         <View className="bg-red-500 px-5 py-2 rounded-full">
           <Text>Logout</Text>
@@ -13,13 +24,13 @@ function HomeScreen(props) {
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     backgroundColor: "#f93",
   },
 });

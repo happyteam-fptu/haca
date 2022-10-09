@@ -6,7 +6,7 @@ function SignUpScreen(props) {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => Alert.alert("W.I.P", "Work on progress")}
+        onPress={() => Alert.alert("W.I.P", "Work in progress")}
       >
         <Text style={styles.txt}>SignUpScreen</Text>
       </TouchableOpacity>
