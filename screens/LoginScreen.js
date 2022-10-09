@@ -151,7 +151,7 @@ const LoginScreen = ({ navigation }) => {
           className="flex-1 bg-white"
           behavior={Platform.OS == "ios" ? "padding" : "height"}
         >
-          <StatusBar backgroundColor="#f93" barStyle="default" />
+          <StatusBar backgroundColor="#f93" barStyle="dark-content" />
           <SafeAreaView className="relative z-10">
             <TouchableOpacity
               className={`absolute right-0 p-2`}
