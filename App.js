@@ -53,7 +53,7 @@ function App() {
         <Stack.Screen
           name="Main"
           component={MainScreen}
-          options={{ animation: "fade" }}
+          options={{ animation: "fade", headerShown: false }}
         />
         <Stack.Screen
           name="Welcome"

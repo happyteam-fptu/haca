@@ -8,7 +8,7 @@ import {
   StatusBar,
   SafeAreaView,
 } from "react-native";
-import signOut from "../utilities/signOut";
+import signOut from "../../utilities/signOut";
 import MaskedView from "@react-native-masked-view/masked-view";
 
 const HomeScreen = ({ navigation }) => {
