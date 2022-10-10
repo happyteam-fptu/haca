@@ -6,7 +6,6 @@ import * as RootNavigation from "./utilities/RootNavigation";
 
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
-import SignUpScreen from "./screens/SignUpScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -24,12 +23,21 @@ function App() {
       const AT = await AsyncStorage.getItem("access_token");
       const RT = await AsyncStorage.getItem("refresh_token");
       if (AT !== null && RT !== null) {
-        RootNavigation.navigate("Home");
+        RootNavigation.dispatch({
+          index: 1,
+          routes: [{ name: "Home" }],
+        });
       } else {
-        RootNavigation.navigate("Welcome");
+        RootNavigation.dispatch({
+          index: 1,
+          routes: [{ name: "Welcome" }],
+        });
       }
     } catch (e) {
-      RootNavigation.navigate("Welcome");
+      RootNavigation.dispatch({
+        index: 1,
+        routes: [{ name: "Welcome" }],
+      });
       console.log(e);
     }
   };
@@ -45,7 +53,7 @@ function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ headerShown: false, animation: "fade" }}
+          options={{ animation: "fade" }}
         />
         <Stack.Screen
           name="Welcome"
@@ -65,7 +73,6 @@ function App() {
           }}
         />
         <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

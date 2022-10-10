@@ -1,40 +1,29 @@
 import { View, Text } from "react-native";
 import React from "react";
 import ProgressHUD from "../components/ProgressHUD";
+import { CommonActions } from "@react-navigation/native";
 
 const LoadingScreen = ({ route, navigation }) => {
-  const [visible, setVisible] = React.useState(true);
-
   React.useEffect(() => {
-    const unsubscribe2 = navigation.addListener("focus", () => {
-      setVisible(true);
-    });
-
     setTimeout(() => {
       route?.params?.toScreen &&
-        navigation.navigate(
-          route.params.toScreen,
-          route.params.params ? route.params.params : null
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 1,
+            routes: [
+              {
+                name: route.params.toScreen,
+                params: route.params?.params ? route.params.params : null,
+              },
+            ],
+          })
         );
     }, 1300);
-
-    const unsubscribe = navigation.addListener("blur", () => {
-      // do something
-      setTimeout(() => {
-        setVisible(false);
-      }, 1300);
-    });
-
-    return unsubscribe, unsubscribe2;
   });
 
   return (
     <View class="flex-1 bg-white">
-      <ProgressHUD
-        loadText="Đang tải..."
-        visible={visible}
-        noBackground={true}
-      />
+      <ProgressHUD loadText="Đang tải..." visible={true} noBackground={true} />
     </View>
   );
 };

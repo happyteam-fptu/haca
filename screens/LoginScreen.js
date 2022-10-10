@@ -22,9 +22,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { CommonActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import FormData from "form-data";
-
-FormData.prototype[Symbol.toStringTag] = "FormData";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 /**
  * TODO:
@@ -239,6 +237,29 @@ const LoginScreen = ({ navigation }) => {
                 <ActivityIndicator size="small" color="#fff" />
               )}
             </TouchableOpacity>
+            <View className="flex-row max-w-[90%] my-7">
+              <View className="h-[0.5px] flex-1 bg-gray-300 my-1.5"></View>
+              <Text className="mx-8 text-center text-gray-600 font-medium text-[11px]">
+                HOẶC
+              </Text>
+              <View className="h-[0.5px] flex-1 bg-gray-300 my-1.5"></View>
+            </View>
+            <View>
+              <TouchableOpacity
+                className="flex-row items-center gap-x-2"
+                onPress={() =>
+                  Alert.alert(
+                    "Chức năng chưa phát triển... :v",
+                    "Nạp vip để ủng hộ mình nhé :3"
+                  )
+                }
+              >
+                <FontAwesome name={"user-secret"} size={20} color={"#F79122"} />
+                <Text className="font-medium text-[#F79122]">
+                  Tiếp tục với tư cách khách
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </KeyboardAvoidingView>
         <View className="h-20 border-t-[0.5px] border-gray-300 justify-center items-center">
