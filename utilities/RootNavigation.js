@@ -25,4 +25,10 @@ export function dispatch(props) {
   }
 }
 
+export function replace(params) {
+  if (navigationRef.isReady()) {
+    navigationRef.replace(params);
+  }
+}
+
 // add other navigation functions that you need and export them

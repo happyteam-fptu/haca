@@ -46,24 +46,24 @@ const WelcomeScreen = ({ navigation }) => {
             </Text>
           </View>
         </View>
-        <TouchableOpacity
-          className="items-center mb-4"
-          style={{
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 4,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-          }}
-          onPress={() => navigation.navigate("Login")}
-        >
-          <View className="w-[50%] bg-white h-14 items-center justify-center rounded-full">
+        <View className="items-center ">
+          <TouchableOpacity
+            className="mb-4 w-[50%] bg-white h-14 items-center justify-center rounded-full"
+            style={{
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            }}
+            onPress={() => navigation.navigate("Login")}
+          >
             <Text className="font-bold text-[16px]">Bắt đầu</Text>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
         <View className="px-4 flex-row justify-center mb-4 opacity-50">
           <Text className="text-black text-xs">v0.2.1</Text>
           <Text className="text-black"> - </Text>
