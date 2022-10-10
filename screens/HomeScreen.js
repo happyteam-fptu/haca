@@ -14,6 +14,15 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#f93" barStyle={"default"} />
+      <View className="flex-row w-[100%] h-10 mb-1 bg-white justify-between">
+        <Text className="text-3xl align-text-top">Haca</Text>
+        <TouchableOpacity>
+          <Image
+            className="w-10 h-10"
+            source={require("../assets/search.jpg")}
+          />
+        </TouchableOpacity>
+      </View>
       <Image
         className="w-[90%] h-[20%]"
         source={require("../assets/anhbiapage.jpg")}
@@ -27,37 +36,40 @@ const HomeScreen = ({ navigation }) => {
           <Text className="mx-2 h-20 text-2xl">hello</Text>
         </TouchableOpacity>
       </View>
-      <View className="flex-row w-[90%] h-[15%] justify-center align-middle pt-3 bg-green-300">
-        <TouchableOpacity className="flex-1 w-[15%] h-[15%]">
+      <View className="flex-row w-[90%] h-[20%] justify-between bg-green-300">
+        <TouchableOpacity>
           <Image
-            className="w-14 h-14"
+            className="w-16 h-16 m-2"
             source={require("../assets/imgLib.jpg")}
           />
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 w-[15%] h-[15%]">
-          <Image className="w-14 h-14" source={require("../assets/list.jpg")} />
-        </TouchableOpacity>
-        <TouchableOpacity className="flex-1 w-[15%] h-[15%]">
+        <TouchableOpacity>
           <Image
-            className="w-14 h-14 bg-white "
+            className="w-16 h-16 m-2"
+            source={require("../assets/list.jpg")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image
+            className="w-16 h-16 bg-white m-2 "
             source={require("../assets/friend.jpg")}
           />
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 w-[15%] h-[15%]">
+        <TouchableOpacity>
           <Image
-            className="w-14 h-14"
+            className="w-16 h-16 m-2"
             source={require("../assets/birthday.jpg")}
           />
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 w-[15%] h-[15%]">
+        <TouchableOpacity>
           <Image
-            className="w-14 h-14"
+            className="w-16 h-16 m-2"
             source={require("../assets/music.jpg")}
           />
         </TouchableOpacity>
-        <TouchableOpacity className="flex-1 w-[15%] h-[15%]">
+        <TouchableOpacity>
           <Image
-            className="w-14 h-14 bg-white "
+            className="w-16 h-16 bg-white m-2"
             source={require("../assets/calendar.jpg")}
           />
         </TouchableOpacity>
