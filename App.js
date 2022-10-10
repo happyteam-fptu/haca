@@ -5,11 +5,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as RootNavigation from "./utilities/RootNavigation";
 
 import LoginScreen from "./screens/LoginScreen";
-import HomeScreen from "./screens/HomeScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoadingScreen from "./screens/LoadingScreen";
+import MainScreen from "./screens/MainScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +25,7 @@ function App() {
       if (AT !== null && RT !== null) {
         RootNavigation.dispatch({
           index: 1,
-          routes: [{ name: "Home" }],
+          routes: [{ name: "Main" }],
         });
       } else {
         RootNavigation.dispatch({
@@ -51,8 +51,8 @@ function App() {
           options={{ headerShown: false, animation: "none" }}
         />
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Main"
+          component={MainScreen}
           options={{ animation: "fade" }}
         />
         <Stack.Screen
