@@ -36,11 +36,6 @@ const MainScreen = () => {
       initialRouteName="Home"
       activeColor="#F79122"
       inactiveColor="#aaa"
-      screenOptions={({ route }) => ({
-        tabBarLabel: (
-          <Text style={{ lineHeight: 25 }}>{getHeaderTitle(route.name)}</Text>
-        ),
-      })}
       shifting={true}
       sceneAnimationEnabled={true}
     >
@@ -50,7 +45,7 @@ const MainScreen = () => {
         options={{
           title: "Trang chủ",
           tabBarIcon: ({ focused, color }) => (
-            <Octicons name="home" size={25} color={color} />
+            <Octicons name="home" size={22} color={color} />
           ),
         }}
       />
@@ -60,7 +55,7 @@ const MainScreen = () => {
         options={{
           title: "Khám phá",
           tabBarIcon: ({ focused, color }) => (
-            <Octicons name="telescope" size={25} color={color} />
+            <Octicons name="telescope" size={22} color={color} />
           ),
         }}
       />
@@ -70,7 +65,7 @@ const MainScreen = () => {
         options={{
           title: "Chat",
           tabBarIcon: ({ focused, color }) => (
-            <Octicons name="comment-discussion" size={25} color={color} />
+            <Octicons name="comment-discussion" size={22} color={color} />
           ),
         }}
       />
@@ -80,7 +75,7 @@ const MainScreen = () => {
         options={{
           title: "Thông báo",
           tabBarIcon: ({ focused, color }) => (
-            <Octicons name="bell" size={25} color={color} />
+            <Octicons name="bell" size={22} color={color} />
           ),
         }}
       />
@@ -90,7 +85,7 @@ const MainScreen = () => {
         options={{
           title: "Menu",
           tabBarIcon: ({ focused, color }) => (
-            <Octicons name="three-bars" size={25} color={color} />
+            <Octicons name="three-bars" size={22} color={color} />
           ),
         }}
       />

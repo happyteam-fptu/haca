@@ -2,17 +2,38 @@ import React from "react";
 import {
   Text,
   View,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
   StatusBar,
-  SafeAreaView,
+  ScrollView,
+  RefreshControl,
 } from "react-native";
-import signOut from "../../utilities/signOut";
-import MaskedView from "@react-native-masked-view/masked-view";
+import SameHeader from "../../components/SameHeader";
 
 const HomeScreen = ({ navigation }) => {
-  return <View></View>;
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  return (
+    <>
+      <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
+      <SameHeader
+        icon="search"
+        action={() => null}
+        havingIcon
+        className="bg-white"
+        title={"Trang chủ"}
+      />
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);
+              setTimeout(() => setRefreshing(false), 1000);
+            }}
+          />
+        }
+      ></ScrollView>
+    </>
+  );
 };
 
 export default HomeScreen;
