@@ -6,6 +6,7 @@ import {
   ScrollView,
   RefreshControl,
 } from "react-native";
+import HomeScreenCarousel from "../../components/HomeScreenCarousel";
 import SameHeader from "../../components/SameHeader";
 
 const HomeScreen = ({ navigation }) => {
@@ -20,6 +21,7 @@ const HomeScreen = ({ navigation }) => {
         havingIcon
         className="bg-white"
         title={"Trang chủ"}
+        havingBorder
       />
       <ScrollView
         refreshControl={
@@ -31,7 +33,9 @@ const HomeScreen = ({ navigation }) => {
             }}
           />
         }
-      ></ScrollView>
+      >
+        <HomeScreenCarousel />
+      </ScrollView>
     </>
   );
 };

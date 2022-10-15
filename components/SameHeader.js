@@ -31,7 +31,6 @@ const SameHeader = ({
   backAction,
   style,
 }) => {
-  console.log(statusBarHeight);
   if (havingBackground) {
     return (
       <View style={style}>
@@ -129,91 +128,84 @@ const SameHeader = ({
     );
   } else {
     return (
-      <SafeAreaView style={style}>
-        <View
-          style={
-            havingBorder
-              ? {
-                  width: "100%",
-                  paddingTop: 8,
-                  height: statusBarHeight + 55,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  backgroundColor: "white",
-                  borderBottomWidth: 0.2,
-                  borderColor: "rgba(0,0,0,0.2)",
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 0,
+      <>
+        <SafeAreaView style={style}>
+          <View
+            style={[
+              havingBorder
+                ? {
+                    width: "100%",
+                    paddingTop: 8,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "white",
+                    borderBottomWidth: 0.2,
+                    borderColor: "rgba(0,0,0,0.2)",
+                  }
+                : {
+                    width: "100%",
+                    paddingTop: 8,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    backgroundColor: "white",
                   },
-                  shadowOpacity: 0.1,
-                  shadowRadius: 2,
-                  elevation: 7,
-                }
-              : {
-                  width: "100%",
-                  paddingTop: 8,
-                  height: statusBarHeight + 55,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  backgroundColor: "white",
-                }
-          }
-        >
-          {havingIcon ? (
-            <TouchableOpacity style={{ marginTop: statusBarHeight }}>
-              <View
+              { height: 56, alignItems: "center", paddingBottom: 4 },
+            ]}
+          >
+            {havingIcon ? (
+              <TouchableOpacity style={{ marginTop: statusBarHeight }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginLeft: 10,
+                    marginTop: 1.8,
+                  }}
+                >
+                  <Image
+                    className="aspect-square w-10"
+                    source={require("../assets/logo-app.png")}
+                    resizeMode="contain"
+                  />
+                  <Text className="font-extrabold text-[#202020] text-3xl -mb-0.5 ml-1">
+                    Haca
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ) : (
+              <Text
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginLeft: 10,
-                  marginTop: 1.8,
+                  fontSize: 25,
+                  fontWeight: "bold",
+                  textAlign: "left",
+                  marginTop: statusBarHeight,
+                  marginLeft: 15,
                 }}
               >
-                <Image
-                  className="aspect-square w-10"
-                  source={require("../assets/logo-app.png")}
-                  resizeMode="contain"
-                />
-                <Text className="font-extrabold text-[#202020] text-3xl -mb-0.5 ml-1">
-                  Haca
-                </Text>
+                {title}
+              </Text>
+            )}
+            <TouchableOpacity
+              onPress={action}
+              style={{ marginTop: statusBarHeight }}
+            >
+              <View
+                style={{
+                  marginRight: 13,
+                  backgroundColor: "rgba(0,0,0,0.10)",
+                  padding: 5,
+                  paddingLeft: 6,
+                  paddingRight: 6,
+                  borderRadius: 100,
+                  marginBottom: 5,
+                }}
+              >
+                <Ionicons name={icon} size={23} color={"black"} />
               </View>
             </TouchableOpacity>
-          ) : (
-            <Text
-              style={{
-                fontSize: 25,
-                fontWeight: "bold",
-                textAlign: "left",
-                marginTop: statusBarHeight,
-                marginLeft: 15,
-              }}
-            >
-              {title}
-            </Text>
-          )}
-          <TouchableOpacity
-            onPress={action}
-            style={{ marginTop: statusBarHeight }}
-          >
-            <View
-              style={{
-                marginRight: 13,
-                backgroundColor: "rgba(0,0,0,0.10)",
-                padding: 5,
-                paddingLeft: 6,
-                paddingRight: 6,
-                borderRadius: 100,
-                marginBottom: 5,
-              }}
-            >
-              <Ionicons name={icon} size={23} color={"black"} />
-            </View>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+          </View>
+        </SafeAreaView>
+      </>
     );
   }
 };
