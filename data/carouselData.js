@@ -4,11 +4,11 @@ const carouselData = [
     body: "App di động đầu tiên dành cho sinh viên lớp SE1741 - Đại học FPT Hà Nội.",
     imgUrl: require("../assets/home-slider/1.jpeg"),
   },
-  // {
-  //   title: "",
-  //   body: "",
-  //   imgUrl: require("../assets/home-slider/2.jpeg"),
-  // },
+  {
+    title: "",
+    body: "",
+    imgUrl: require("../assets/home-slider/2.jpeg"),
+  },
   // {
   //   title: "Nhanh, gọn, tiện lợi",
   //   body: "Đó là những từ có thể dùng để miêu tả cho ứng dụng này.",
