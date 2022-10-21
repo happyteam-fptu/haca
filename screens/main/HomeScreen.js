@@ -123,8 +123,9 @@ const HomeScreen = ({ navigation }) => {
             }}
           />
         }
+        contentContainerStyle={{ paddingBottom: 45 }}
       >
-        <HomeScreenCarousel />
+        {/* <HomeScreenCarousel /> */}
         <View
           style={{
             backgroundColor: "white",
@@ -254,6 +255,80 @@ const HomeScreen = ({ navigation }) => {
               </TouchableHighlight>
             );
           })}
+        </View>
+        <View className="mt-4 bg-white flex-1 p-5  shadow-sm">
+          <View className="flex-row items-center justify-between mb-2">
+            <View className="flex-row items-center">
+              <Text className="font-medium text-xl">Bài tập về nhà</Text>
+              <View className="bg-red-400 h-5 p-1 rounded-full ml-2 justify-center items-center">
+                <Text className="text-[10px] text-white font-bold">1 mới</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Notifications", {
+                  previous_screen: "HomeScreen",
+                });
+              }}
+            >
+              <View className="flex-row items-center">
+                <Text className="text-gray-500">Xem tất cả</Text>
+                <Ionicons
+                  name="arrow-forward-outline"
+                  size={18}
+                  color={"gray"}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+          {/* render notifications */}
+          {notificationData == "" && (
+            <>
+              {/* <Image
+                source={require("../assets/loading.gif")}
+                className="h-5 w-16 scale-75 -ml-1.5"
+              /> */}
+            </>
+          )}
+          <View className="flex-row">
+            <View className="w-0.5 bg-gray-200 h-[3px] absolute left-0 -bottom-4 rounded-sm"></View>
+            <View className="w-0.5 bg-gray-300 h-1.5 absolute left-0 -bottom-2 rounded-sm"></View>
+            <View className="w-0.5 bg-gray-400 mr-2.5 mt-2.5 mb-0.5 rounded-sm"></View>
+            <View>
+              {notificationData.results?.map((item, index) => (
+                <View key={index} className="flex-row">
+                  <View className="w-1.5 h-1.5 bg-gray-400 rounded-full absolute my-2.5 -mx-3.5"></View>
+                  <View className="flex-row items-center">
+                    <Text className="text-gray-500 w-[72px] text-xs">
+                      {moment(item.date).format("L")}
+                    </Text>
+                    <TouchableOpacity
+                      className="py-[3px]"
+                      onPress={() => {
+                        navigation.navigate("NotiScreen", {
+                          id: item.id,
+                          title: item.title,
+                          content: item.content,
+                          date: item.date,
+                          by: item.createdBy,
+                          image: item.image,
+                        });
+                      }}
+                    >
+                      <Text
+                        numberOfLines={1}
+                        lineBreakMode={"tail"}
+                        className="text-blue-500 relative text-[16px] truncate ml-1"
+                        style={{ width: screenWidth - 120 }}
+                      >
+                        {item.title}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </View>
         </View>
         <View className="mt-4 bg-white flex-1 p-5  shadow-sm">
           <View className="flex-row items-center justify-between mb-2">
@@ -395,8 +470,8 @@ const HomeScreen = ({ navigation }) => {
           <View>
             {/* render sponsors */}
             <Text className="mb-3">
-              C4K60 Web và C4K60 Mobile có thể đã không được tồn tại mà không có
-              sự hỗ trợ từ các mạnh thường quân sau:
+              Haca có thể đã không được tồn tại mà không có sự hỗ trợ từ các
+              mạnh thường quân sau:
             </Text>
             {sponsorsData == "" && (
               <>
@@ -452,27 +527,21 @@ const HomeScreen = ({ navigation }) => {
           </View>
           <View>
             {/* render changes */}
-            <Text className="text-[16px]">Phiên bản 4.0</Text>
+            <Text className="text-[16px]">Phiên bản 1.0</Text>
             <Text className="font-light text-[14px] mt-1">
-              Ngày phát hành: 03/09/2022
+              Ngày phát hành: 21/10/2022
             </Text>
             <View className="mt-2.5">
               <View className="pl-2 text-base flex-row">
                 <Text className="text-[30px] leading-6">· </Text>
                 <Text className="items-center">
-                  Ra mắt phiên bản di động của C4K60.
+                  Ra mắt phiên bản di động của Haca - Happy Class.
                 </Text>
               </View>
               <View className="pl-2 text-base flex-row">
                 <Text className="text-[30px] leading-6">· </Text>
                 <Text className="items-center">
-                  Ra mắt phiên bản web hoàn toàn mới của C4K60.
-                </Text>
-              </View>
-              <View className="pl-2 text-base flex-row">
-                <Text className="text-[30px] leading-6">· </Text>
-                <Text className="items-center">
-                  Cải thiện hiệu suất ứng dụng...
+                  Cải thiện hiệu suất và sửa lỗi...
                 </Text>
               </View>
             </View>
