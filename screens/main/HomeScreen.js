@@ -21,15 +21,14 @@ import moment from "moment";
 import subjectData from "../../data/subjectData";
 import notificationData from "../../data/notificationData";
 import MaskedView from "@react-native-masked-view/masked-view";
+import sponsorsData from "../../data/sponsorsData";
+import birthdayData from "../../data/birthdayData";
 
 const screenWidth = Dimensions.get("window").width;
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = React.useState(false);
   const [rightFade, setRightFade] = React.useState(true);
-
-  const birthdayData = [];
-  const sponsorsData = [];
 
   React.useEffect(() => {
     async function test() {
@@ -285,9 +284,7 @@ const HomeScreen = ({ navigation }) => {
                   <TouchableOpacity activeOpacity={0.5}>
                     {item.homeworks?.length > 0 && (
                       <View
-                        className={`absolute bg-gray-400 px-2 py-1 pr-4 z-50 rounded-tl-2xl rounded-br-3xl ${
-                          index != 0 ? "top-[0.1px]" : "top-[1.5px]"
-                        }`}
+                        className={`absolute bg-gray-400 px-2 py-1 pr-4 z-50 rounded-tl-2xl rounded-br-3xl top-[0.1px]`}
                       >
                         <Text className="text-white">
                           {item.homeworks?.length} bài tập
@@ -359,7 +356,7 @@ const HomeScreen = ({ navigation }) => {
                   <View className="w-1.5 h-1.5 bg-gray-400 rounded-full absolute my-2.5 -mx-3.5"></View>
                   <View className="flex-row items-center">
                     <Text className="text-gray-500 w-[72px] text-xs">
-                      {moment(item.date).format("L")}
+                      {moment(item.date).format("DD/MM/yyyy")}
                     </Text>
                     <TouchableOpacity
                       className="py-[3px]"
