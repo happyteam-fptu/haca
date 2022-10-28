@@ -216,7 +216,9 @@ const HomeScreen = ({ navigation }) => {
             <View className="flex-row items-center">
               <Text className="font-medium text-xl">Bài tập về nhà</Text>
               <View className="bg-red-400 h-5 p-1 rounded-full ml-2 justify-center items-center">
-                <Text className="text-[10px] text-white font-bold">1 mới</Text>
+                <Text className="text-[10px] text-white font-bold">
+                  4 đã giao
+                </Text>
               </View>
             </View>
             <TouchableOpacity
@@ -254,7 +256,6 @@ const HomeScreen = ({ navigation }) => {
                   bottom: 0,
                   height: "100%",
                   width: "100%",
-                  // backgroundColor: "red",
                   zIndex: 99,
                 }}
                 colors={[
@@ -269,21 +270,45 @@ const HomeScreen = ({ navigation }) => {
                 end={{ x: 0, y: 0 }}
               />
             }
+            style={{ marginHorizontal: -20, marginTop: 5 }}
           >
             <ScrollView
               horizontal
-              contentContainerStyle={{ paddingBottom: 10 }}
+              scrollIndicatorInsets={{ right: 20, left: 20 }}
+              contentContainerStyle={{
+                paddingHorizontal: 20,
+                paddingBottom: 10,
+              }}
             >
               {subjectData?.currentSubjects?.map((item, index) => {
                 return (
-                  <View key={index} className="mr-2">
-                    {/* nice */}
-                    {/* Its will render some subjects */}
-                    <Image
-                      source={item.image}
-                      className="w-48 object-contain h-28 rounded-2xl"
-                    ></Image>
-                  </View>
+                  <TouchableOpacity activeOpacity={0.5}>
+                    {item.homeworks?.length > 0 && (
+                      <View
+                        className={`absolute bg-gray-400 px-2 py-1 pr-4 z-50 rounded-tl-2xl rounded-br-3xl ${
+                          index != 0 ? "top-[0.1px]" : "top-[1.5px]"
+                        }`}
+                      >
+                        <Text className="text-white">
+                          {item.homeworks?.length} bài tập
+                        </Text>
+                      </View>
+                    )}
+                    <View
+                      key={index}
+                      className={`${
+                        index != subjectData.currentSubjects.length - 1 &&
+                        "mr-2"
+                      }`}
+                    >
+                      {/* nice */}
+                      {/* Its will render some subjects */}
+                      <Image
+                        source={item.image}
+                        className="w-48 object-contain h-28 rounded-2xl"
+                      ></Image>
+                    </View>
+                  </TouchableOpacity>
                 );
               })}
             </ScrollView>

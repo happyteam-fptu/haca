@@ -139,7 +139,7 @@ const SameHeader = ({
                     flexDirection: "row",
                     justifyContent: "space-between",
                     backgroundColor: "white",
-                    borderBottomWidth: 0.5,
+                    borderBottomWidth: 0.4,
                     borderColor: "rgba(0,0,0,0.2)",
                   }
                 : {
