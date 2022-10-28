@@ -18,76 +18,13 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import menuData from "../../global/quickMenuData";
 import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
+import subjectData from "../../data/subjectData";
+import notificationData from "../../data/notificationData";
 
 const screenWidth = Dimensions.get("window").width;
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = React.useState(false);
-  const notificationData = {
-    total: 8,
-    results: [
-      {
-        id: 19,
-        title: "Tiết MAD ngày 6/10 nghỉ học do cô bị ốm",
-        content: "ạoidháohjđạoạláljáđậo",
-        createdBy: "TANH đzzai hihi^^",
-        image: [
-          {
-            img_id: 1,
-            url: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Yen_Bai_-_dogs_-_P1390010.JPG",
-          },
-          {
-            img_id: 2,
-            url: "https://petizen.vn/wp-content/uploads/2019/03/9-giong-cho-canh-duoc-yeu-thich-nhat.jpg",
-          },
-        ],
-        date: "2022-05-10 17:31:01",
-      },
-      {
-        id: 18,
-        title: "Nhắc đi họp lớp chiều mùng 3/9",
-        content:
-          "Hmm hello anh em :))) để test thử khả năng truyền tải thông báo lớp qua app của tui thì nay tui nhắc luôn mn chiều hôm nay (03/09/2022) lúc 3h anh em tập trung tại cổng trường để đi cafe tại Monolic nkaaaa 😘",
-        createdBy: "Dương Tùng Anh",
-        image: [
-          { img_id: 1, url: "https://c4k60.com/assets/images/cafe_hong.jpeg" },
-        ],
-        date: "2022-09-03 10:46:19",
-      },
-      {
-        id: 14,
-        title: "Tùng Anh đẹp trai vcl",
-        content: "Nhỉ?? :)))) ai cũng phải công nhận",
-        createdBy: "Admin C4K60",
-        image: [
-          {
-            img_id: 1,
-            url: "https://c4k60.com/anhvavideo/media/original/%E1%BA%A2nh%20k%E1%BB%B7%20y%E1%BA%BFu/217707980348167410533151108516773PHQ_2379-min.jpg",
-          },
-        ],
-        date: "2021-12-11 21:24:23",
-      },
-      {
-        id: 12,
-        title: "Thu quần áo thuê chụp",
-        content:
-          "Ra chơi tiết 1 ngày mai t sẽ thu từng người từng bộ qao cmay thuê để chiều mai ship trả cho studio, ai thiếu đồ gì sẽ phải đền bù cho bên đó nhé",
-        createdBy: "Ngô Phương Anh",
-        image: [{ img_id: 1, url: "no" }],
-        date: "2021-01-23 21:02:51",
-      },
-      {
-        id: 11,
-        title: "Lịch trình buổi chụp ",
-        content:
-          "7-10h chụp ở trường\n10h-12h mng tự túc ăn trưa và nghỉ ngơi\n12h15 lên xe di chuyển đến vườn nhãn Long Biên\n14h-16h15 chụp tại vườn nhãn\n16h30 lên xe về Phủ Lý\n19h chụp party night tại Vinpearl\nMng đọc để nắm lịch và xin phép bố mẹ nhé",
-        createdBy: "Ngô Phương Anh",
-        image: [{ img_id: 1, url: "no" }],
-        date: "2021-01-23 20:58:59",
-      },
-    ],
-    otherNotifications: 6,
-  };
   const birthdayData = [];
   const sponsorsData = [];
 
@@ -256,6 +193,7 @@ const HomeScreen = ({ navigation }) => {
             );
           })}
         </View>
+        {/* Homework Section */}
         <View className="mt-4 bg-white flex-1 p-5  shadow-sm">
           <View className="flex-row items-center justify-between mb-2">
             <View className="flex-row items-center">
@@ -281,7 +219,7 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-          {/* render notifications */}
+          {/* Render some loading gif... */}
           {notificationData == "" && (
             <>
               {/* <Image
@@ -290,46 +228,16 @@ const HomeScreen = ({ navigation }) => {
               /> */}
             </>
           )}
-          <View className="flex-row">
-            <View className="w-0.5 bg-gray-200 h-[3px] absolute left-0 -bottom-4 rounded-sm"></View>
-            <View className="w-0.5 bg-gray-300 h-1.5 absolute left-0 -bottom-2 rounded-sm"></View>
-            <View className="w-0.5 bg-gray-400 mr-2.5 mt-2.5 mb-0.5 rounded-sm"></View>
-            <View>
-              {notificationData.results?.map((item, index) => (
-                <View key={index} className="flex-row">
-                  <View className="w-1.5 h-1.5 bg-gray-400 rounded-full absolute my-2.5 -mx-3.5"></View>
-                  <View className="flex-row items-center">
-                    <Text className="text-gray-500 w-[72px] text-xs">
-                      {moment(item.date).format("L")}
-                    </Text>
-                    <TouchableOpacity
-                      className="py-[3px]"
-                      onPress={() => {
-                        navigation.navigate("NotiScreen", {
-                          id: item.id,
-                          title: item.title,
-                          content: item.content,
-                          date: item.date,
-                          by: item.createdBy,
-                          image: item.image,
-                        });
-                      }}
-                    >
-                      <Text
-                        numberOfLines={1}
-                        lineBreakMode={"tail"}
-                        className="text-blue-500 relative text-[16px] truncate ml-1"
-                        style={{ width: screenWidth - 120 }}
-                      >
-                        {item.title}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              ))}
-            </View>
+          {/* render homework subject images... */}
+          <View>
+            {subjectData?.currentSubjects?.map((item, index) => {
+              return (
+                <View key={index}>{/* Its will render some subjects */}</View>
+              );
+            })}
           </View>
         </View>
+        {/* Class Notification section */}
         <View className="mt-4 bg-white flex-1 p-5  shadow-sm">
           <View className="flex-row items-center justify-between mb-2">
             <View className="flex-row items-center">
@@ -404,6 +312,7 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View>
         </View>
+        {/* Incoming Birthday section */}
         <View className="mt-4 bg-white flex-1 p-5 shadow-sm">
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Sinh nhật sắp tới</Text>
@@ -453,6 +362,7 @@ const HomeScreen = ({ navigation }) => {
             )
           )}
         </View>
+        {/* Sponsors section */}
         <View className="mt-4 bg-white flex-1 p-5 shadow-sm">
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Nhà tài trợ</Text>
@@ -511,6 +421,7 @@ const HomeScreen = ({ navigation }) => {
             ))}
           </View>
         </View>
+        {/* Application Changelog section */}
         <View className="mt-4 bg-white flex-1 p-5 shadow-sm">
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Những thay đổi</Text>

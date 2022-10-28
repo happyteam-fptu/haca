@@ -1,3 +1,4 @@
+// Unused now... due to removing the slider from the home page
 const carouselData = [
   {
     title: "Chào mừng đến với Haca",
@@ -9,6 +10,7 @@ const carouselData = [
     body: "",
     imgUrl: require("../assets/home-slider/2.jpeg"),
   },
+  // From C4K60's source code
   // {
   //   title: "Nhanh, gọn, tiện lợi",
   //   body: "Đó là những từ có thể dùng để miêu tả cho ứng dụng này.",
