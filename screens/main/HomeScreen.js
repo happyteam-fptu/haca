@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import HomeScreenCarousel from "../../components/HomeScreenCarousel";
+// import HomeScreenCarousel from "../../components/HomeScreenCarousel";
 import SameHeader from "../../components/SameHeader";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // import axiosInstance from "../../utilities/axiosApi";
@@ -20,6 +20,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
 import subjectData from "../../data/subjectData";
 import notificationData from "../../data/notificationData";
+import MaskedView from "@react-native-masked-view/masked-view";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -229,13 +230,59 @@ const HomeScreen = ({ navigation }) => {
             </>
           )}
           {/* render homework subject images... */}
-          <View>
-            {subjectData?.currentSubjects?.map((item, index) => {
-              return (
-                <View key={index}>{/* Its will render some subjects */}</View>
-              );
-            })}
-          </View>
+          <MaskedView
+          // maskElement={
+          //   <LinearGradient
+          //     start={{ x: 0, y: 0 }}
+          //     end={{ x: 0, y: 1 }}
+          //     colors={[
+          //       "rgba(0,0,0,0)",
+          //       "rgba(0,0,0,1)",
+          //       "rgba(0,0,0,1)",
+          //       "rgba(0,0,0,0)",
+          //     ]}
+          //     locations={[0, 0.05, 0.95, 1]}
+          //     style={{
+          //       width: "97%",
+          //       marginLeft: 3,
+          //       height: 40,
+          //       position: "absolute",
+          //       zIndex: 10,
+          //       backgroundColor: "red",
+          //     }}
+          //   />
+          // }
+          >
+            <LinearGradient
+              style={{
+                position: "absolute",
+                bottom: 0,
+                height: "100%",
+                width: "100%",
+                backgroundColor: "red",
+                zIndex: 99,
+              }}
+              colors={["rgba(255, 255, 255, 0.1)", "rgba(255, 255, 255, 0.8)"]}
+              pointerEvents={"none"}
+            />
+            <ScrollView
+              horizontal
+              contentContainerStyle={{ paddingBottom: 10 }}
+            >
+              {subjectData?.currentSubjects?.map((item, index) => {
+                return (
+                  <View key={index} className="mr-2">
+                    {/* nice */}
+                    {/* Its will render some subjects */}
+                    <Image
+                      source={item.image}
+                      className="w-48 object-contain h-28 rounded-2xl"
+                    ></Image>
+                  </View>
+                );
+              })}
+            </ScrollView>
+          </MaskedView>
         </View>
         {/* Class Notification section */}
         <View className="mt-4 bg-white flex-1 p-5  shadow-sm">
