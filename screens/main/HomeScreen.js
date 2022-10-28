@@ -26,6 +26,8 @@ const screenWidth = Dimensions.get("window").width;
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = React.useState(false);
+  const [rightFade, setRightFade] = React.useState(true);
+
   const birthdayData = [];
   const sponsorsData = [];
 
@@ -39,6 +41,20 @@ const HomeScreen = ({ navigation }) => {
     }
     test();
   }, []);
+
+  const isCloseToBottom = ({
+    layoutMeasurement,
+    contentOffset,
+    contentSize,
+  }) => {
+    return (
+      layoutMeasurement.height + contentOffset.y >= contentSize.height - 20
+    );
+  };
+
+  const ifCloseToTop = ({ layoutMeasurement, contentOffset, contentSize }) => {
+    return contentOffset.y == 0;
+  };
 
   return (
     <>
@@ -231,40 +247,29 @@ const HomeScreen = ({ navigation }) => {
           )}
           {/* render homework subject images... */}
           <MaskedView
-          // maskElement={
-          //   <LinearGradient
-          //     start={{ x: 0, y: 0 }}
-          //     end={{ x: 0, y: 1 }}
-          //     colors={[
-          //       "rgba(0,0,0,0)",
-          //       "rgba(0,0,0,1)",
-          //       "rgba(0,0,0,1)",
-          //       "rgba(0,0,0,0)",
-          //     ]}
-          //     locations={[0, 0.05, 0.95, 1]}
-          //     style={{
-          //       width: "97%",
-          //       marginLeft: 3,
-          //       height: 40,
-          //       position: "absolute",
-          //       zIndex: 10,
-          //       backgroundColor: "red",
-          //     }}
-          //   />
-          // }
+            maskElement={
+              <LinearGradient
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  height: "100%",
+                  width: "100%",
+                  // backgroundColor: "red",
+                  zIndex: 99,
+                }}
+                colors={[
+                  `rgba(255, 255, 255, 1)`,
+                  "rgba(255, 255, 255, 1)",
+                  "rgba(255, 255, 255, 1)",
+                  "rgba(255, 255, 255, 0)",
+                ]}
+                locations={[1, 0.95, 0.2, 0]}
+                pointerEvents={"none"}
+                start={{ x: 1, y: 0 }}
+                end={{ x: 0, y: 0 }}
+              />
+            }
           >
-            <LinearGradient
-              style={{
-                position: "absolute",
-                bottom: 0,
-                height: "100%",
-                width: "100%",
-                backgroundColor: "red",
-                zIndex: 99,
-              }}
-              colors={["rgba(255, 255, 255, 0.1)", "rgba(255, 255, 255, 0.8)"]}
-              pointerEvents={"none"}
-            />
             <ScrollView
               horizontal
               contentContainerStyle={{ paddingBottom: 10 }}
