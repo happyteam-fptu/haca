@@ -23,6 +23,7 @@ import notificationData from "../../data/notificationData";
 import MaskedView from "@react-native-masked-view/masked-view";
 import sponsorsData from "../../data/sponsorsData";
 import birthdayData from "../../data/birthdayData";
+import demo from "../../utilities/demo";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -85,12 +86,7 @@ const HomeScreen = ({ navigation }) => {
           }}
           className="shadow-sm"
         >
-          <TouchableHighlight
-            underlayColor="rgba(0, 0, 0, .2)"
-            onPress={() => {
-              null;
-            }}
-          >
+          <TouchableHighlight underlayColor="rgba(0, 0, 0, .2)" onPress={demo}>
             <View
               style={{
                 height: 100,
@@ -119,7 +115,7 @@ const HomeScreen = ({ navigation }) => {
                     marginBottom: 3,
                   }}
                 >
-                  Chào Dương Tùng Anh,
+                  Chào buổi tối, Dương Tùng Anh!
                 </Text>
                 <Text
                   numberOfLines={2}
@@ -279,35 +275,32 @@ const HomeScreen = ({ navigation }) => {
                 paddingBottom: 10,
               }}
             >
-              {subjectData?.currentSubjects?.map((item, index) => {
-                return (
-                  <TouchableOpacity activeOpacity={0.5}>
-                    {item.homeworks?.length > 0 && (
-                      <View
-                        className={`absolute bg-gray-400 px-2 py-1 pr-4 z-50 rounded-tl-2xl rounded-br-3xl top-[0.1px]`}
-                      >
-                        <Text className="text-white">
-                          {item.homeworks?.length} bài tập
-                        </Text>
-                      </View>
-                    )}
+              {subjectData?.currentSubjects?.map((item, index) => (
+                <TouchableOpacity key={index} activeOpacity={0.5}>
+                  {item.homeworks?.length > 0 && (
                     <View
-                      key={index}
-                      className={`${
-                        index != subjectData.currentSubjects.length - 1 &&
-                        "mr-2"
-                      }`}
+                      className={`absolute bg-gray-400 px-2 py-1 pr-4 z-50 rounded-tl-2xl rounded-br-3xl top-[0.1px]`}
                     >
-                      {/* nice */}
-                      {/* Its will render some subjects */}
-                      <Image
-                        source={item.image}
-                        className="w-48 object-contain h-28 rounded-2xl"
-                      ></Image>
+                      <Text className="text-white">
+                        {item.homeworks?.length} bài tập
+                      </Text>
                     </View>
-                  </TouchableOpacity>
-                );
-              })}
+                  )}
+                  <View
+                    key={index}
+                    className={`${
+                      index != subjectData.currentSubjects.length - 1 && "mr-2"
+                    }`}
+                  >
+                    {/* nice */}
+                    {/* Its will render some subjects */}
+                    <Image
+                      source={item.image}
+                      className="w-48 object-contain h-28 rounded-2xl"
+                    ></Image>
+                  </View>
+                </TouchableOpacity>
+              ))}
             </ScrollView>
           </MaskedView>
         </View>
