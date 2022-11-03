@@ -7,6 +7,7 @@ import {
   StatusBar,
   Animated,
   Easing,
+  Linking,
 } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
@@ -67,11 +68,15 @@ const WelcomeScreen = ({ navigation }) => {
         <View className="px-4 flex-row justify-center mb-4 opacity-50">
           <Text className="text-black text-xs">v0.2.1</Text>
           <Text className="text-black"> - </Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL("https://policies.haca.me/terms")}
+          >
             <Text className="text-black text-xs">Điều khoản</Text>
           </TouchableOpacity>
           <Text className="text-black"> - </Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL("https://policies.haca.me/privacy")}
+          >
             <Text className="text-black text-xs">Quyền riêng tư</Text>
           </TouchableOpacity>
         </View>

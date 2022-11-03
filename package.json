@@ -1,6 +1,6 @@
 {
   "name": "haca",
-  "version": "1.0.0",
+  "version": "0.3.2",
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",
@@ -17,7 +17,6 @@
     "deprecated-react-native-prop-types": "^2.3.0",
     "expo": "~46.0.9",
     "expo-linear-gradient": "^11.4.0",
-    "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
     "expo-updates": "~0.14.6",
     "install": "^0.13.0",

@@ -19,15 +19,36 @@ function App() {
   }, []);
 
   const checkLoggedInState = async () => {
+    // console.log("Checking logged in state...");
+    AsyncStorage.getItem("alreadyLaunched").then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem("alreadyLaunched", "true"); // No need to wait for `setItem` to finish, although you might want to handle errors
+        RootNavigation.dispatch({
+          index: 1,
+          routes: [{ name: "Welcome" }],
+        });
+        RootNavigation.navigate("Welcome");
+        // console.log("App is never launched before");
+      } else {
+        // console.log("App is already launched before");
+        RootNavigation.dispatch({
+          index: 1,
+          routes: [{ name: "Main" }],
+        });
+      }
+    });
     try {
+      // console.log("Try executing");
       const AT = await AsyncStorage.getItem("access_token");
       const RT = await AsyncStorage.getItem("refresh_token");
-      if (AT !== null && RT !== null) {
+      if (AT !== null || RT !== null) {
+        // console.log("AT or RT detected");
         RootNavigation.dispatch({
           index: 1,
           routes: [{ name: "Main" }],
         });
       } else {
+        // console.log("Not detect AT or RT");
         RootNavigation.dispatch({
           index: 1,
           routes: [{ name: "Welcome" }],
@@ -40,6 +61,7 @@ function App() {
       });
       console.log(e);
     }
+    // console.log("Done checking logged in state.");
   };
 
   return (
