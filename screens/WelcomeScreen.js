@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import VersionInfo from "react-native-version-info";
 
 const WelcomeScreen = ({ navigation }) => {
   return (
@@ -66,7 +67,9 @@ const WelcomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View className="px-4 flex-row justify-center mb-4 opacity-50">
-          <Text className="text-black text-xs">v0.2.1</Text>
+          <Text className="text-black text-xs">
+            v{VersionInfo.appVersion} ({VersionInfo.buildVersion})
+          </Text>
           <Text className="text-black"> - </Text>
           <TouchableOpacity
             onPress={() => Linking.openURL("https://policies.haca.me/terms")}

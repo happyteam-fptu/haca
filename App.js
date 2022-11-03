@@ -1,4 +1,18 @@
-import React from "react";
+import { Asset } from "expo-asset";
+import Constants from "expo-constants";
+import * as SplashScreen from "expo-splash-screen";
+import * as Updates from "expo-updates";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  Animated,
+  Button,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Easing,
+  StatusBar,
+} from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -7,100 +21,171 @@ import * as RootNavigation from "./utilities/RootNavigation";
 import LoginScreen from "./screens/LoginScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoadingScreen from "./screens/LoadingScreen";
 import MainScreen from "./screens/MainScreen";
 
 const Stack = createNativeStackNavigator();
 
-function App() {
-  React.useEffect(() => {
-    checkLoggedInState();
-  }, []);
+// Instruct SplashScreen not to hide yet, we want to do this manually
+SplashScreen.preventAutoHideAsync().catch(() => {
+  /* reloading the app might trigger some race conditions, ignore them */
+});
 
-  const checkLoggedInState = async () => {
-    // console.log("Checking logged in state...");
-    AsyncStorage.getItem("alreadyLaunched").then((value) => {
-      if (value === null) {
-        AsyncStorage.setItem("alreadyLaunched", "true"); // No need to wait for `setItem` to finish, although you might want to handle errors
-        RootNavigation.dispatch({
-          index: 1,
-          routes: [{ name: "Welcome" }],
-        });
-        RootNavigation.navigate("Welcome");
-        // console.log("App is never launched before");
-      } else {
-        // console.log("App is already launched before");
-        RootNavigation.dispatch({
-          index: 1,
-          routes: [{ name: "Main" }],
-        });
-      }
-    });
-    try {
-      // console.log("Try executing");
-      const AT = await AsyncStorage.getItem("access_token");
-      const RT = await AsyncStorage.getItem("refresh_token");
-      if (AT !== null || RT !== null) {
-        // console.log("AT or RT detected");
-        RootNavigation.dispatch({
-          index: 1,
-          routes: [{ name: "Main" }],
-        });
-      } else {
-        // console.log("Not detect AT or RT");
-        RootNavigation.dispatch({
-          index: 1,
-          routes: [{ name: "Welcome" }],
-        });
-      }
-    } catch (e) {
-      RootNavigation.dispatch({
-        index: 1,
-        routes: [{ name: "Welcome" }],
-      });
-      console.log(e);
-    }
-    // console.log("Done checking logged in state.");
-  };
-
+export default function App() {
   return (
-    <NavigationContainer ref={RootNavigation.navigationRef}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Loading"
-          component={LoadingScreen}
-          options={{ headerShown: false, animation: "none" }}
-        />
-        <Stack.Screen
-          name="Main"
-          component={MainScreen}
-          options={{
-            animation: "fade",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Welcome"
-          component={WelcomeScreen}
-          options={{
-            headerShown: false,
-            animation: "fade",
-          }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            headerShown: false,
-            animation: "slide_from_bottom",
-            animationDuration: 330,
-          }}
-        />
-        <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AnimatedAppLoader image={require("./assets/logo-only-splash.png")}>
+      <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
+      <NavigationContainer ref={RootNavigation.navigationRef}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Loading"
+            component={LoadingScreen}
+            options={{ headerShown: false, animation: "fade" }}
+          />
+          <Stack.Screen
+            name="Main"
+            component={MainScreen}
+            options={{
+              animation: "fade",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Welcome"
+            component={WelcomeScreen}
+            options={{
+              headerShown: false,
+              animation: "fade",
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              headerShown: false,
+              animation: "slide_from_bottom",
+              animationDuration: 330,
+            }}
+          />
+          <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AnimatedAppLoader>
   );
 }
 
-export default App;
+function AnimatedAppLoader({ children, image }) {
+  const [isSplashReady, setSplashReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      await Asset.fromModule(image);
+      setSplashReady(true);
+    }
+
+    prepare();
+  }, [image]);
+
+  if (!isSplashReady) {
+    return null;
+  }
+
+  return <AnimatedSplashScreen image={image}>{children}</AnimatedSplashScreen>;
+}
+
+function AnimatedSplashScreen({ children, image }) {
+  const animation0 = useMemo(() => new Animated.Value(1), []);
+  const animation = useMemo(() => new Animated.Value(1), []);
+  const [isAppReady, setAppReady] = useState(false);
+  const [isSplashAnimationComplete, setAnimationComplete] = useState(false);
+
+  useEffect(() => {
+    if (isAppReady) {
+      Animated.timing(animation0, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(animation, {
+        toValue: 0,
+        duration: 800,
+        delay: 800,
+        useNativeDriver: true,
+      }).start(() => setAnimationComplete(true));
+    }
+  }, [isAppReady]);
+
+  const onImageLoaded = useCallback(async () => {
+    try {
+      await SplashScreen.hideAsync();
+      // Load stuff
+      await Promise.all([]);
+    } catch (e) {
+      // handle errors
+    } finally {
+      setAppReady(true);
+    }
+  }, []);
+
+  return (
+    <View style={{ flex: 1 }}>
+      {isAppReady && children}
+      {!isSplashAnimationComplete && (
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              backgroundColor: Constants.manifest.splash.backgroundColor,
+              opacity: animation,
+            },
+          ]}
+        >
+          <Animated.Image
+            style={{
+              width: "100%",
+              height: "100%",
+              resizeMode: Constants.manifest.splash.resizeMode || "contain",
+              position: "relative",
+              zIndex: 99,
+              opacity: animation0.interpolate({
+                inputRange: [0, 0.2, 1],
+                outputRange: [0, 0, 1],
+                extrapolate: "clamp",
+              }),
+            }}
+            source={require("./assets/splash.png")}
+            onLoadEnd={onImageLoaded}
+            fadeDuration={0}
+          />
+          <Animated.Image
+            style={{
+              width: "100%",
+              height: "100%",
+              resizeMode: Constants.manifest.splash.resizeMode || "contain",
+              transform: [
+                {
+                  scale: animation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 1],
+                  }),
+                },
+                {
+                  translateY: animation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [-700, 0],
+                  }),
+                },
+              ],
+              position: "absolute",
+              zIndex: -1,
+            }}
+            source={image}
+            onLoadEnd={onImageLoaded}
+            fadeDuration={0}
+          />
+        </Animated.View>
+      )}
+    </View>
+  );
+}
