@@ -262,6 +262,10 @@ const LoginScreen = ({ navigation }) => {
             </View>
           </View>
         </KeyboardAvoidingView>
+        <Image
+          source={require("../assets/team-art/cover.jpg")}
+          className="object-contain w-full h-1/5"
+        />
         <View className="h-20 border-t-[0.5px] border-gray-300 justify-center items-center">
           <View className="flex-row">
             <Text className="text-gray-500 text-xs">
