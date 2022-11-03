@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pc-api-5905252752339156585-881",
+  "private_key_id": "33db609d422b37b556fbfe30b6c54a7079e48db4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwAU1dq/teYd4W\nkIrkG2pbkvuUokvoiEfhHv3TaILasmXJuFL7DogF15Be48sHV5Eoh77gHEMRTzWi\nyI5O1nlvF+0gbaHbei/p7ZxcKQBvq+CwZU1ZZSMAsLERkJkqb6M/bno5n13wCGaw\npaGQtdWf4xINcGL7eDoLDUUTXZw6ZQ/cEzbbg6joEi4jmwm2Yit8Mhj2u3khHLpT\nutHKrVlwut5HNZFhznadiKhuhxyeHtL9WB1eo/sP83KVpx3IdfAKDGTuaj006sTR\nNUgj//8mH85FY9hsdAmMZxt6Qy4G8UvuqyF2AYxreHWWand8ouXDLmIf3f7R7AkK\n2/d6Nt33AgMBAAECggEASGJwuAqIGdv0I6GUjZW82yaK8ykAQQTzUuGVEIIV9u2R\nsTFuZzQluwlZpbzXfhCEcX/Kf48AAjlqXKVQ6ZmJXaggbMrJ22LYG8QOH1T5ifPN\nN56h/hb7G0iPuiKW6334TJkaCWLClnpOCW5FESfHULdpcD99ZeCfNnZhp0JDgzvn\nLTnYA+cB5cChaug4N6f14T13tFz6s2zmJZUojBQFgpTLdqgSmuomOgfO1QeumjZV\nC5htQyKsKZt0xyFLMe9amV2afJdeyVtNcDtQBdDNAPpcJI3c8K24J8sIn7hGoTeq\n86y6obsXbn3lxRS71SYWJidkKvazav4AxltT0TlA0QKBgQDv9iEww8PJv1Xxoqwj\nBhZcgHGIFkkCxRPhPjiD9LFZL40bbDel2yzumcz7pTAiuEK9cbD/+AO/BJlD9H+4\nG3PclDsrVGuDOwKCOyNEFJFgWHHgDlg7Fsr6jddQeUgp/PMCC37fyEsRGXUQerKA\n2X2vF8yiB80ngCfMwlC1ZcqHmQKBgQC7xNg5kw1xo8lcaXBFvImRq/wNcd/Nibbd\nfIzRLoKNxPEbPVuT1LKPVfng9esmEI3MkD7PGnixBOz9Q0PtFjs9T6b/jD5GK2Qd\nvQO86NCagy7a/eotSAiyFuTQtHmXrlWrM2fYHP6DXBGLZR1O3Y8VyPj3F/jYcW3O\nRiFpHIPMDwKBgAHHi3t3GC6Y0qRWFny0ANpywWTG9Yelun4DHhwsZlxI8/zuEoOS\nWoTycwiysuavAx+whiV/y1dRS2mrmH7fBT7vgnjRyXJRr7UThzFsDZ/vR/jnYlQd\n2Sd+gchA/f4BuDOdrjUuoQ/hZnLW1hgKhNoVjRjugeD3HFRyZHLT7GqRAoGBAKr/\nKbbM/4pFEWSSNQedGl9KE6Ge2aTRzHHKMmdxhr1a5APdjd+D7RTxxD0lV39zxd7M\nYhazUcRL6xL9xgdMnqhIOJoy+qdmbqdScewAzbBY1TvjzvZryld81+Zk5PLIdgYS\nK3i5duLj3qpmbBldVigNvQUxlJJwQgJ/BYA20qPrAoGAYX7N5m8/6FWGToKt9EwU\n6MUb61iY1spu7gh9erHYfgmpBnGB2iFkjA3k3g8K5HLQkSrfIHVewG6e5rXSzGHN\n8bJAQRumtjaRv01ODmhfZsxqugluNa4cB6sQOmbVKH9mEwvX5n9hj2dB0NDCvP2H\n7d8EgZt0KhwitCbxMBDBBc8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "haca-app-2022@pc-api-5905252752339156585-881.iam.gserviceaccount.com",
+  "client_id": "110940926802993691183",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/haca-app-2022%40pc-api-5905252752339156585-881.iam.gserviceaccount.com"
+}
