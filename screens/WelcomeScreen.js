@@ -68,7 +68,8 @@ const WelcomeScreen = ({ navigation }) => {
         </View>
         <View className="px-4 flex-row justify-center mb-4 opacity-50">
           <Text className="text-black text-xs">
-            v{VersionInfo.appVersion} ({VersionInfo.buildVersion})
+            {/* v{VersionInfo.appVersion} ({VersionInfo.buildVersion}) */}
+            v0.5.4 Beta
           </Text>
           <Text className="text-black"> - </Text>
           <TouchableOpacity

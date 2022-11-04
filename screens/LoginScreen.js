@@ -145,128 +145,149 @@ const LoginScreen = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View className="flex-1 bg-white">
-        <KeyboardAvoidingView
-          className="flex-1 bg-white"
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-        >
-          <StatusBar backgroundColor="#f93" barStyle="dark-content" />
-          <SafeAreaView className="relative z-10">
-            <TouchableOpacity
-              className={`absolute right-0 p-2`}
-              style={Platform.OS == "ios" && { top: getStatusBarHeight() }}
-              onPress={() => navigation.goBack()}
+        <View className="flex-1">
+          <View className="flex-1">
+            <KeyboardAvoidingView
+              className="flex-1"
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
             >
-              <Icon name="close-outline" size={45} color="#000" />
-            </TouchableOpacity>
-          </SafeAreaView>
-          <View className="relative z-0 bg-white items-center justify-center flex-1">
-            <View className="flex-row items-center gap-x-2 mb-8">
-              <Image
-                source={require("../assets/logo-app.png")}
-                className="aspect-square w-14 shadow-sm"
-              />
-              <Text className="font-extrabold text-black text-5xl -mb-2.5 shadow-sm">
-                Haca
-              </Text>
-            </View>
-            <TextInput
-              onChangeText={(val) => {
-                val.length > 0
-                  ? setIsUsernameEmpty(false)
-                  : setIsUsernameEmpty(true);
-                setUsername(val);
-              }}
-              value={username}
-              className={`bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] ${
-                wrongPassMsgVisible && wrongMsg == "Không tìm thấy tài khoản."
-                  ? "border-red-500"
-                  : "border-gray-300"
-              }`}
-              placeholder="Tên đăng nhập"
-              placeholderTextColor={"#707070"}
-              ref={usernameRef}
-              onSubmitEditing={() => handleLogin()}
-            />
-            <TextInput
-              onChangeText={(val) => {
-                val.length > 0
-                  ? setIsPasswordEmpty(false)
-                  : setIsPasswordEmpty(true);
-                setPassword(val);
-              }}
-              value={password}
-              className={`bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] ${
-                wrongPassMsgVisible && wrongMsg == "Sai mật khẩu."
-                  ? "border-red-500"
-                  : "border-gray-300"
-              }`}
-              placeholder="Mật khẩu"
-              secureTextEntry
-              placeholderTextColor={"#707070"}
-              ref={passwordRef}
-              onSubmitEditing={() => handleLogin()}
-            />
-            <View className="mt-1 mb-4 flex-row justify-between w-[90%]">
-              <Text
-                className={`text-right text-xs text-red-500 ${
-                  !wrongPassMsgVisible && "opacity-0"
-                }`}
-              >
-                {wrongMsg}
-              </Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
-                <Text className="text-right text-xs font-semibold text-[#F79122]">
-                  Quên mật khẩu?
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity
-              onPress={() => handleLogin()}
-              className={`w-[90%] ${
-                isUsernameEmpty || isPasswordEmpty || signingIn
-                  ? "bg-[#ffb363]"
-                  : "bg-[#F79122]"
-              } py-3.5 rounded-md`}
-              disabled={isUsernameEmpty || isPasswordEmpty || signingIn}
-            >
-              {!signingIn ? (
-                <Text className="font-semibold text-center text-white leading-5">
-                  Đăng nhập
-                </Text>
-              ) : (
-                <ActivityIndicator size="small" color="#fff" />
-              )}
-            </TouchableOpacity>
-            <View className="flex-row max-w-[90%] my-7">
-              <View className="h-[0.5px] flex-1 bg-gray-300 my-1.5"></View>
-              <Text className="mx-8 text-center text-gray-600 font-medium text-[11px]">
-                HOẶC
-              </Text>
-              <View className="h-[0.5px] flex-1 bg-gray-300 my-1.5"></View>
-            </View>
-            <View>
-              <TouchableOpacity
-                className="flex-row items-center gap-x-2"
-                onPress={() =>
-                  Alert.alert(
-                    "Chức năng chưa phát triển... :v",
-                    "Nạp vip để ủng hộ mình nhé :3"
-                  )
-                }
-              >
-                <FontAwesome name={"user-secret"} size={20} color={"#F79122"} />
-                <Text className="font-medium text-[#F79122]">
-                  Tiếp tục với tư cách khách
-                </Text>
-              </TouchableOpacity>
-            </View>
+              <StatusBar backgroundColor="#f93" barStyle="dark-content" />
+              <View className="absolute z-[1] opacity-50 w-full h-full">
+                <Image
+                  source={require("../assets/team-art/tunganh.jpeg")}
+                  className="absolute w-24 h-24 rotate-12 translate-y-32"
+                />
+                <Image
+                  source={require("../assets/team-art/quan.jpg")}
+                  className="absolute w-24 h-24 -rotate-12 translate-y-32 -translate-x-5 right-0"
+                />
+              </View>
+              <SafeAreaView className="relative z-10">
+                <TouchableOpacity
+                  className={`absolute right-0 p-2`}
+                  style={Platform.OS == "ios" && { top: getStatusBarHeight() }}
+                  onPress={() => navigation.goBack()}
+                >
+                  <Icon name="close-outline" size={45} color="#000" />
+                </TouchableOpacity>
+              </SafeAreaView>
+              <View className="relative z-[2] items-center justify-center flex-1">
+                <View className="flex-row items-center gap-x-2 mb-8">
+                  <Image
+                    source={require("../assets/logo-app.png")}
+                    className="aspect-square w-14 shadow-sm"
+                  />
+                  <Text className="font-extrabold text-black text-5xl -mb-2.5 shadow-sm">
+                    Haca
+                  </Text>
+                </View>
+                <TextInput
+                  onChangeText={(val) => {
+                    val.length > 0
+                      ? setIsUsernameEmpty(false)
+                      : setIsUsernameEmpty(true);
+                    setUsername(val);
+                  }}
+                  value={username}
+                  className={`bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] ${
+                    wrongPassMsgVisible &&
+                    wrongMsg == "Không tìm thấy tài khoản."
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                  placeholder="Tên đăng nhập"
+                  placeholderTextColor={"#707070"}
+                  ref={usernameRef}
+                  onSubmitEditing={() => handleLogin()}
+                />
+                <TextInput
+                  onChangeText={(val) => {
+                    val.length > 0
+                      ? setIsPasswordEmpty(false)
+                      : setIsPasswordEmpty(true);
+                    setPassword(val);
+                  }}
+                  value={password}
+                  className={`bg-gray-50 w-[90%] p-3.5 mb-3 rounded-md border-[0.5px] ${
+                    wrongPassMsgVisible && wrongMsg == "Sai mật khẩu."
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                  placeholder="Mật khẩu"
+                  secureTextEntry
+                  placeholderTextColor={"#707070"}
+                  ref={passwordRef}
+                  onSubmitEditing={() => handleLogin()}
+                />
+                <View className="mt-1 mb-4 flex-row justify-between w-[90%]">
+                  <Text
+                    className={`text-right text-xs text-red-500 ${
+                      !wrongPassMsgVisible && "opacity-0"
+                    }`}
+                  >
+                    {wrongMsg}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Forgot")}
+                  >
+                    <Text className="text-right text-xs font-semibold text-[#F79122]">
+                      Quên mật khẩu?
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <TouchableOpacity
+                  onPress={() => handleLogin()}
+                  className={`w-[90%] ${
+                    isUsernameEmpty || isPasswordEmpty || signingIn
+                      ? "bg-[#ffb363]"
+                      : "bg-[#F79122]"
+                  } py-3.5 rounded-md`}
+                  disabled={isUsernameEmpty || isPasswordEmpty || signingIn}
+                >
+                  {!signingIn ? (
+                    <Text className="font-semibold text-center text-white leading-5">
+                      Đăng nhập
+                    </Text>
+                  ) : (
+                    <ActivityIndicator size="small" color="#fff" />
+                  )}
+                </TouchableOpacity>
+                <View className="flex-row max-w-[90%] my-7">
+                  <View className="h-[0.5px] flex-1 bg-gray-300 my-1.5"></View>
+                  <Text className="mx-8 text-center text-gray-600 font-medium text-[11px]">
+                    HOẶC
+                  </Text>
+                  <View className="h-[0.5px] flex-1 bg-gray-300 my-1.5"></View>
+                </View>
+                <View>
+                  <TouchableOpacity
+                    className="flex-row items-center gap-x-2"
+                    onPress={() =>
+                      Alert.alert(
+                        "Chức năng chưa phát triển... :v",
+                        "Nạp vip để ủng hộ mình nhé :3"
+                      )
+                    }
+                  >
+                    <FontAwesome
+                      name={"user-secret"}
+                      size={20}
+                      color={"#F79122"}
+                    />
+                    <Text className="font-medium text-[#F79122]">
+                      Tiếp tục với tư cách khách
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </KeyboardAvoidingView>
           </View>
-        </KeyboardAvoidingView>
-        <Image
-          source={require("../assets/team-art/cover.jpg")}
-          className="object-contain w-full h-1/5"
-        />
-        <View className="h-20 border-t-[0.5px] border-gray-300 justify-center items-center">
+          <Image
+            source={require("../assets/team-art/cover.jpg")}
+            className="absolute bottom-0 -z-10 object-contain w-full h-1/5 opacity-70"
+          />
+        </View>
+        <View className="h-20 border-t-[0.5px] border-gray-300 justify-center items-center bg-white">
           <View className="flex-row">
             <Text className="text-gray-500 text-xs">
               Bạn chưa có tài khoản ư?{" "}
