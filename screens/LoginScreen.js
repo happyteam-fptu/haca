@@ -152,16 +152,12 @@ const LoginScreen = ({ navigation }) => {
               behavior={Platform.OS == "ios" ? "padding" : "height"}
             >
               <StatusBar backgroundColor="#f93" barStyle="dark-content" />
-              <View className="absolute z-[1] opacity-50 w-full h-full">
+              <SafeAreaView className="absolute w-full h-full mt-3 opacity-70">
                 <Image
-                  source={require("../assets/team-art/tunganh.jpeg")}
-                  className="absolute w-24 h-24 rotate-12 translate-y-32"
+                  source={require("../assets/team-art/cover.jpg")}
+                  className="absolute -z-10 object-contain w-full h-1/5 opacity-70 mt-8"
                 />
-                <Image
-                  source={require("../assets/team-art/quan.jpg")}
-                  className="absolute w-24 h-24 -rotate-12 translate-y-32 -translate-x-5 right-0"
-                />
-              </View>
+              </SafeAreaView>
               <SafeAreaView className="relative z-10">
                 <TouchableOpacity
                   className={`absolute right-0 p-2`}
@@ -283,8 +279,8 @@ const LoginScreen = ({ navigation }) => {
             </KeyboardAvoidingView>
           </View>
           <Image
-            source={require("../assets/team-art/cover.jpg")}
-            className="absolute bottom-0 -z-10 object-contain w-full h-1/5 opacity-70"
+            source={require("../assets/team-art/slider.jpg")}
+            className="absolute bottom-0 h-24 object-contain w-full opacity-50"
           />
         </View>
         <View className="h-20 border-t-[0.5px] border-gray-300 justify-center items-center bg-white">
@@ -305,39 +301,5 @@ const LoginScreen = ({ navigation }) => {
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#f93",
-  },
-  txt: {
-    fontSize: 30,
-    textAlign: "center",
-    margin: 10,
-  },
-  input: {
-    width: "90%",
-    backgroundColor: "#fff",
-    padding: 12,
-    marginBottom: 10,
-  },
-  btnContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "80%",
-  },
-  button: {
-    backgroundColor: "#ff3",
-    padding: 12,
-    width: "40%",
-  },
-  btnTxt: {
-    fontSize: 15,
-    textAlign: "center",
-  },
-});
 
 export default LoginScreen;

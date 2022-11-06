@@ -64,7 +64,7 @@ const LoadingScreen = ({ route, navigation }) => {
 
   return (
     <>
-      <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
+      <StatusBar barStyle={"light-content"} />
       <View class="flex-1">
         <ProgressHUD
           loadText="Đang tải..."
