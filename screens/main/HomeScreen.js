@@ -155,7 +155,7 @@ const HomeScreen = ({ navigation }) => {
               <TouchableHighlight
                 key={index}
                 underlayColor="rgba(0, 0, 0, .2)"
-                onPress={demo}
+                onPress={() => demo}
                 // onPress={() => {
                 //   // this.props.navigation.navigate(item.route);
                 //   navigation.navigate(item.route);
@@ -218,7 +218,7 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </View>
             <TouchableOpacity
-              onPress={demo}
+              onPress={() => demo}
               // onPress={() => {
               //   navigation.navigate("Notifications", {
               //     previous_screen: "HomeScreen",
@@ -387,7 +387,7 @@ const HomeScreen = ({ navigation }) => {
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Sinh nhật sắp tới</Text>
             <TouchableOpacity
-              onPress={demo}
+              onPress={() => demo}
               //onPress={() => navigation.navigate("IncomingBirthday")}
             >
               <View className="flex-row items-center">
@@ -437,7 +437,7 @@ const HomeScreen = ({ navigation }) => {
         <View className="mt-4 bg-white flex-1 p-5 shadow-sm">
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Nhà tài trợ</Text>
-            <TouchableOpacity onPress={demo}>
+            <TouchableOpacity onPress={() => demo}>
               <View className="flex-row items-center">
                 <Text className="text-gray-500">Xem tất cả</Text>
                 <Ionicons
@@ -476,7 +476,8 @@ const HomeScreen = ({ navigation }) => {
                     <TouchableOpacity
                       disabled={!item.link}
                       onPress={() => {
-                        Linking.openURL(item.link);
+                        demo;
+                        //Linking.openURL(item.link);
                       }}
                     >
                       <Text
@@ -496,7 +497,7 @@ const HomeScreen = ({ navigation }) => {
         <View className="mt-4 bg-white flex-1 p-5 shadow-sm">
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Những thay đổi</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => demo}>
               <View className="flex-row items-center">
                 <Text className="text-gray-500">Xem tất cả</Text>
                 <Ionicons
