@@ -115,7 +115,7 @@ const HomeScreen = ({ navigation }) => {
                     marginBottom: 3,
                   }}
                 >
-                  Chào buổi tối, Dương Tùng Anh!
+                  Xin chào
                 </Text>
                 <Text
                   numberOfLines={2}
@@ -155,10 +155,11 @@ const HomeScreen = ({ navigation }) => {
               <TouchableHighlight
                 key={index}
                 underlayColor="rgba(0, 0, 0, .2)"
-                onPress={() => {
-                  // this.props.navigation.navigate(item.route);
-                  navigation.navigate(item.route);
-                }}
+                onPress={demo}
+                // onPress={() => {
+                //   // this.props.navigation.navigate(item.route);
+                //   navigation.navigate(item.route);
+                // }}
                 style={{
                   width: screenWidth / 3,
                 }}
@@ -217,11 +218,12 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => {
-                navigation.navigate("Notifications", {
-                  previous_screen: "HomeScreen",
-                });
-              }}
+              onPress={demo}
+              // onPress={() => {
+              //   navigation.navigate("Notifications", {
+              //     previous_screen: "HomeScreen",
+              //   });
+              // }}
             >
               <View className="flex-row items-center">
                 <Text className="text-gray-500">Xem tất cả</Text>
@@ -314,11 +316,12 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => {
-                navigation.navigate("Notifications", {
-                  previous_screen: "HomeScreen",
-                });
-              }}
+              onPress={demo}
+              // onPress={() => {
+              //   navigation.navigate("Notifications", {
+              //     previous_screen: "HomeScreen",
+              //   });
+              // }}
             >
               <View className="flex-row items-center">
                 <Text className="text-gray-500">Xem tất cả</Text>
@@ -384,7 +387,8 @@ const HomeScreen = ({ navigation }) => {
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Sinh nhật sắp tới</Text>
             <TouchableOpacity
-              onPress={() => navigation.navigate("IncomingBirthday")}
+              onPress={demo}
+              //onPress={() => navigation.navigate("IncomingBirthday")}
             >
               <View className="flex-row items-center">
                 <Text className="text-gray-500">Xem tất cả</Text>
@@ -433,7 +437,7 @@ const HomeScreen = ({ navigation }) => {
         <View className="mt-4 bg-white flex-1 p-5 shadow-sm">
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Nhà tài trợ</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={demo}>
               <View className="flex-row items-center">
                 <Text className="text-gray-500">Xem tất cả</Text>
                 <Ionicons
