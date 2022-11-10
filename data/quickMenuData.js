@@ -27,7 +27,7 @@ const menuData = [
     title: "Nghe nhạc cùng nhau",
     iconName: "musical-notes",
     bgColor: ["#009E78", "#17EAB7"],
-    route: "MusicScreen",
+    route: "Music",
   },
   {
     title: "Lịch",

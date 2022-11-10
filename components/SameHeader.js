@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Octicons from "react-native-vector-icons/Octicons";
+import demo from "../utilities/demo";
 // import { getStatusBarHeight } from "react-native-status-bar-height";
 import * as RootNavigation from "../utilities/RootNavigation";
 var { height, width } = Dimensions.get("window");
@@ -153,7 +154,10 @@ const SameHeader = ({
             ]}
           >
             {havingIcon ? (
-              <TouchableOpacity style={{ marginTop: statusBarHeight }}>
+              <TouchableOpacity
+                style={{ marginTop: statusBarHeight }}
+                onPress={demo}
+              >
                 <View
                   style={{
                     flexDirection: "row",
@@ -186,7 +190,7 @@ const SameHeader = ({
               </Text>
             )}
             <TouchableOpacity
-              onPress={action}
+              onPress={!action ? action : demo}
               style={{ marginTop: statusBarHeight }}
             >
               <View

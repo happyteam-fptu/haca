@@ -12,6 +12,7 @@ import {
   View,
   Easing,
   StatusBar,
+  LogBox,
 } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -23,6 +24,7 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import LoadingScreen from "./screens/LoadingScreen";
 import MainScreen from "./screens/MainScreen";
+import ListenTogether from "./screens/features/ListenTogether";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +32,10 @@ const Stack = createNativeStackNavigator();
 SplashScreen.preventAutoHideAsync().catch(() => {
   /* reloading the app might trigger some race conditions, ignore them */
 });
+
+LogBox.ignoreLogs([
+  "Error evaluating injectedJavaScript: This is possibly due to an unsupported return type. Try adding true to the end of your injectedJavaScript string.",
+]);
 
 export default function App() {
   return (
@@ -68,6 +74,14 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
+          <Stack.Screen
+            name="Music"
+            component={ListenTogether}
+            options={{
+              headerBackButtonMenuEnabled: false,
+              headerTitle: "Nghe nhạc cùng nhau",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </AnimatedAppLoader>

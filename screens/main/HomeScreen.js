@@ -15,7 +15,7 @@ import {
 import SameHeader from "../../components/SameHeader";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // import axiosInstance from "../../utilities/axiosApi";
-import menuData from "../../global/quickMenuData";
+import menuData from "../../data/quickMenuData";
 import { LinearGradient } from "expo-linear-gradient";
 import moment from "moment";
 import subjectData from "../../data/subjectData";
@@ -155,11 +155,10 @@ const HomeScreen = ({ navigation }) => {
               <TouchableHighlight
                 key={index}
                 underlayColor="rgba(0, 0, 0, .2)"
-                onPress={() => demo}
-                // onPress={() => {
-                //   // this.props.navigation.navigate(item.route);
-                //   navigation.navigate(item.route);
-                // }}
+                // onPress={demo}
+                onPress={() => {
+                  navigation.navigate(item.route);
+                }}
                 style={{
                   width: screenWidth / 3,
                 }}
@@ -218,7 +217,7 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => demo}
+              onPress={demo}
               // onPress={() => {
               //   navigation.navigate("Notifications", {
               //     previous_screen: "HomeScreen",
@@ -278,7 +277,11 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               {subjectData?.currentSubjects?.map((item, index) => (
-                <TouchableOpacity key={index} activeOpacity={0.5}>
+                <TouchableOpacity
+                  key={index}
+                  activeOpacity={0.5}
+                  onPress={demo}
+                >
                   {item.homeworks?.length > 0 && (
                     <View
                       className={`absolute bg-gray-400 px-2 py-1 pr-4 z-50 rounded-tl-2xl rounded-br-3xl top-[0.1px]`}
@@ -356,16 +359,19 @@ const HomeScreen = ({ navigation }) => {
                     </Text>
                     <TouchableOpacity
                       className="py-[3px]"
-                      onPress={() => {
-                        navigation.navigate("NotiScreen", {
-                          id: item.id,
-                          title: item.title,
-                          content: item.content,
-                          date: item.date,
-                          by: item.createdBy,
-                          image: item.image,
-                        });
-                      }}
+                      onPress={
+                        //   () => {
+                        //   navigation.navigate("NotiScreen", {
+                        //     id: item.id,
+                        //     title: item.title,
+                        //     content: item.content,
+                        //     date: item.date,
+                        //     by: item.createdBy,
+                        //     image: item.image,
+                        //   });
+                        // }
+                        demo
+                      }
                     >
                       <Text
                         numberOfLines={1}
@@ -387,7 +393,7 @@ const HomeScreen = ({ navigation }) => {
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Sinh nhật sắp tới</Text>
             <TouchableOpacity
-              onPress={() => demo}
+              onPress={demo}
               //onPress={() => navigation.navigate("IncomingBirthday")}
             >
               <View className="flex-row items-center">
@@ -437,7 +443,7 @@ const HomeScreen = ({ navigation }) => {
         <View className="mt-4 bg-white flex-1 p-5 shadow-sm">
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Nhà tài trợ</Text>
-            <TouchableOpacity onPress={() => demo}>
+            <TouchableOpacity onPress={demo}>
               <View className="flex-row items-center">
                 <Text className="text-gray-500">Xem tất cả</Text>
                 <Ionicons
@@ -475,10 +481,12 @@ const HomeScreen = ({ navigation }) => {
                     <Text className="text-base"> </Text>
                     <TouchableOpacity
                       disabled={!item.link}
-                      onPress={() => {
-                        demo;
-                        //Linking.openURL(item.link);
-                      }}
+                      onPress={
+                        demo
+                        //   () => {
+                        //   //Linking.openURL(item.link);
+                        // }
+                      }
                     >
                       <Text
                         className={`text-sm ${item.link && "text-blue-500"}`}
@@ -497,7 +505,7 @@ const HomeScreen = ({ navigation }) => {
         <View className="mt-4 bg-white flex-1 p-5 shadow-sm">
           <View className="flex-row items-center mb-2 justify-between">
             <Text className="font-medium text-xl">Những thay đổi</Text>
-            <TouchableOpacity onPress={() => demo}>
+            <TouchableOpacity onPress={demo}>
               <View className="flex-row items-center">
                 <Text className="text-gray-500">Xem tất cả</Text>
                 <Ionicons
